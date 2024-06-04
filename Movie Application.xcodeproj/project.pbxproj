@@ -13,6 +13,11 @@
 		DC33E11D2C0EFBF700B8787A /* Base in Resources */ = {isa = PBXBuildFile; fileRef = DC33E11C2C0EFBF700B8787A /* Base */; };
 		DC33E11F2C0EFBF900B8787A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DC33E11E2C0EFBF900B8787A /* Assets.xcassets */; };
 		DC33E1222C0EFBF900B8787A /* Base in Resources */ = {isa = PBXBuildFile; fileRef = DC33E1212C0EFBF900B8787A /* Base */; };
+		DC33E12B2C0EFDF800B8787A /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = DC33E12A2C0EFDF800B8787A /* SnapKit */; };
+		DC33E12D2C0F09A200B8787A /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC33E12C2C0F09A200B8787A /* SettingViewController.swift */; };
+		DC33E1312C0F0B5000B8787A /* MainScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC33E1302C0F0B5000B8787A /* MainScreenViewController.swift */; };
+		DC33E1332C0F37EB00B8787A /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC33E1322C0F37EB00B8787A /* TabBarViewController.swift */; };
+		DC33E1352C0F388000B8787A /* otherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC33E1342C0F388000B8787A /* otherViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +29,10 @@
 		DC33E11E2C0EFBF900B8787A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DC33E1212C0EFBF900B8787A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		DC33E1232C0EFBF900B8787A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DC33E12C2C0F09A200B8787A /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
+		DC33E1302C0F0B5000B8787A /* MainScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenViewController.swift; sourceTree = "<group>"; };
+		DC33E1322C0F37EB00B8787A /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
+		DC33E1342C0F388000B8787A /* otherViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = otherViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,6 +40,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DC33E12B2C0EFDF800B8787A /* SnapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -63,6 +73,10 @@
 				DC33E11E2C0EFBF900B8787A /* Assets.xcassets */,
 				DC33E1202C0EFBF900B8787A /* LaunchScreen.storyboard */,
 				DC33E1232C0EFBF900B8787A /* Info.plist */,
+				DC33E12C2C0F09A200B8787A /* SettingViewController.swift */,
+				DC33E1302C0F0B5000B8787A /* MainScreenViewController.swift */,
+				DC33E1342C0F388000B8787A /* otherViewController.swift */,
+				DC33E1322C0F37EB00B8787A /* TabBarViewController.swift */,
 			);
 			path = "Movie Application";
 			sourceTree = "<group>";
@@ -83,6 +97,9 @@
 			dependencies = (
 			);
 			name = "Movie Application";
+			packageProductDependencies = (
+				DC33E12A2C0EFDF800B8787A /* SnapKit */,
+			);
 			productName = "Movie Application";
 			productReference = DC33E1122C0EFBF700B8787A /* Movie Application.app */;
 			productType = "com.apple.product-type.application";
@@ -111,6 +128,9 @@
 				Base,
 			);
 			mainGroup = DC33E1092C0EFBF700B8787A;
+			packageReferences = (
+				DC33E1292C0EFDF800B8787A /* XCRemoteSwiftPackageReference "SnapKit" */,
+			);
 			productRefGroup = DC33E1132C0EFBF700B8787A /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -138,9 +158,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DC33E1312C0F0B5000B8787A /* MainScreenViewController.swift in Sources */,
 				DC33E11A2C0EFBF700B8787A /* ViewController.swift in Sources */,
+				DC33E1352C0F388000B8787A /* otherViewController.swift in Sources */,
 				DC33E1162C0EFBF700B8787A /* AppDelegate.swift in Sources */,
 				DC33E1182C0EFBF700B8787A /* SceneDelegate.swift in Sources */,
+				DC33E1332C0F37EB00B8787A /* TabBarViewController.swift in Sources */,
+				DC33E12D2C0F09A200B8787A /* SettingViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -298,8 +322,9 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -307,9 +332,13 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "srkimdev.Movie-Application";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -326,8 +355,9 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -335,9 +365,13 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "srkimdev.Movie-Application";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
@@ -363,6 +397,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		DC33E1292C0EFDF800B8787A /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.7.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		DC33E12A2C0EFDF800B8787A /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DC33E1292C0EFDF800B8787A /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = DC33E10A2C0EFBF700B8787A /* Project object */;
 }
