@@ -13,11 +13,16 @@
 		DC33E11D2C0EFBF700B8787A /* Base in Resources */ = {isa = PBXBuildFile; fileRef = DC33E11C2C0EFBF700B8787A /* Base */; };
 		DC33E11F2C0EFBF900B8787A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DC33E11E2C0EFBF900B8787A /* Assets.xcassets */; };
 		DC33E1222C0EFBF900B8787A /* Base in Resources */ = {isa = PBXBuildFile; fileRef = DC33E1212C0EFBF900B8787A /* Base */; };
-		DC33E12B2C0EFDF800B8787A /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = DC33E12A2C0EFDF800B8787A /* SnapKit */; };
 		DC33E12D2C0F09A200B8787A /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC33E12C2C0F09A200B8787A /* SettingViewController.swift */; };
 		DC33E1312C0F0B5000B8787A /* MainScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC33E1302C0F0B5000B8787A /* MainScreenViewController.swift */; };
 		DC33E1332C0F37EB00B8787A /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC33E1322C0F37EB00B8787A /* TabBarViewController.swift */; };
-		DC33E1352C0F388000B8787A /* otherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC33E1342C0F388000B8787A /* otherViewController.swift */; };
+		DC33E1352C0F388000B8787A /* MovieListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC33E1342C0F388000B8787A /* MovieListViewController.swift */; };
+		DC762C252C16E9880050354F /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = DC762C242C16E9880050354F /* SnapKit */; };
+		DC762C282C16ECE20050354F /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = DC762C272C16ECE20050354F /* Alamofire */; };
+		DC762C2A2C16EED40050354F /* movieStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC762C292C16EED40050354F /* movieStruct.swift */; };
+		DC762C2D2C1719A30050354F /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = DC762C2C2C1719A30050354F /* Kingfisher */; };
+		DCACAF4C2C16D51400D0ECD1 /* ReusableProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCACAF4B2C16D51400D0ECD1 /* ReusableProtocol.swift */; };
+		DCACAF4E2C16D56700D0ECD1 /* MovieListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCACAF4D2C16D56700D0ECD1 /* MovieListTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,7 +37,10 @@
 		DC33E12C2C0F09A200B8787A /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		DC33E1302C0F0B5000B8787A /* MainScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenViewController.swift; sourceTree = "<group>"; };
 		DC33E1322C0F37EB00B8787A /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
-		DC33E1342C0F388000B8787A /* otherViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = otherViewController.swift; sourceTree = "<group>"; };
+		DC33E1342C0F388000B8787A /* MovieListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieListViewController.swift; sourceTree = "<group>"; };
+		DC762C292C16EED40050354F /* movieStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = movieStruct.swift; sourceTree = "<group>"; };
+		DCACAF4B2C16D51400D0ECD1 /* ReusableProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReusableProtocol.swift; sourceTree = "<group>"; };
+		DCACAF4D2C16D56700D0ECD1 /* MovieListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieListTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -40,7 +48,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DC33E12B2C0EFDF800B8787A /* SnapKit in Frameworks */,
+				DC762C2D2C1719A30050354F /* Kingfisher in Frameworks */,
+				DC762C252C16E9880050354F /* SnapKit in Frameworks */,
+				DC762C282C16ECE20050354F /* Alamofire in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -66,6 +76,7 @@
 		DC33E1142C0EFBF700B8787A /* Movie Application */ = {
 			isa = PBXGroup;
 			children = (
+				DCACAF4F2C16D57200D0ECD1 /* stuff */,
 				DC33E1152C0EFBF700B8787A /* AppDelegate.swift */,
 				DC33E1172C0EFBF700B8787A /* SceneDelegate.swift */,
 				DC33E1192C0EFBF700B8787A /* ViewController.swift */,
@@ -73,12 +84,22 @@
 				DC33E11E2C0EFBF900B8787A /* Assets.xcassets */,
 				DC33E1202C0EFBF900B8787A /* LaunchScreen.storyboard */,
 				DC33E1232C0EFBF900B8787A /* Info.plist */,
+				DC33E1322C0F37EB00B8787A /* TabBarViewController.swift */,
 				DC33E12C2C0F09A200B8787A /* SettingViewController.swift */,
 				DC33E1302C0F0B5000B8787A /* MainScreenViewController.swift */,
-				DC33E1342C0F388000B8787A /* otherViewController.swift */,
-				DC33E1322C0F37EB00B8787A /* TabBarViewController.swift */,
+				DC33E1342C0F388000B8787A /* MovieListViewController.swift */,
+				DCACAF4D2C16D56700D0ECD1 /* MovieListTableViewCell.swift */,
 			);
 			path = "Movie Application";
+			sourceTree = "<group>";
+		};
+		DCACAF4F2C16D57200D0ECD1 /* stuff */ = {
+			isa = PBXGroup;
+			children = (
+				DCACAF4B2C16D51400D0ECD1 /* ReusableProtocol.swift */,
+				DC762C292C16EED40050354F /* movieStruct.swift */,
+			);
+			path = stuff;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -98,7 +119,9 @@
 			);
 			name = "Movie Application";
 			packageProductDependencies = (
-				DC33E12A2C0EFDF800B8787A /* SnapKit */,
+				DC762C242C16E9880050354F /* SnapKit */,
+				DC762C272C16ECE20050354F /* Alamofire */,
+				DC762C2C2C1719A30050354F /* Kingfisher */,
 			);
 			productName = "Movie Application";
 			productReference = DC33E1122C0EFBF700B8787A /* Movie Application.app */;
@@ -129,7 +152,9 @@
 			);
 			mainGroup = DC33E1092C0EFBF700B8787A;
 			packageReferences = (
-				DC33E1292C0EFDF800B8787A /* XCRemoteSwiftPackageReference "SnapKit" */,
+				DC762C232C16E9880050354F /* XCRemoteSwiftPackageReference "SnapKit" */,
+				DC762C262C16ECE20050354F /* XCRemoteSwiftPackageReference "Alamofire" */,
+				DC762C2B2C1719A30050354F /* XCRemoteSwiftPackageReference "Kingfisher" */,
 			);
 			productRefGroup = DC33E1132C0EFBF700B8787A /* Products */;
 			projectDirPath = "";
@@ -160,10 +185,13 @@
 			files = (
 				DC33E1312C0F0B5000B8787A /* MainScreenViewController.swift in Sources */,
 				DC33E11A2C0EFBF700B8787A /* ViewController.swift in Sources */,
-				DC33E1352C0F388000B8787A /* otherViewController.swift in Sources */,
+				DC33E1352C0F388000B8787A /* MovieListViewController.swift in Sources */,
+				DC762C2A2C16EED40050354F /* movieStruct.swift in Sources */,
 				DC33E1162C0EFBF700B8787A /* AppDelegate.swift in Sources */,
 				DC33E1182C0EFBF700B8787A /* SceneDelegate.swift in Sources */,
 				DC33E1332C0F37EB00B8787A /* TabBarViewController.swift in Sources */,
+				DCACAF4C2C16D51400D0ECD1 /* ReusableProtocol.swift in Sources */,
+				DCACAF4E2C16D56700D0ECD1 /* MovieListTableViewCell.swift in Sources */,
 				DC33E12D2C0F09A200B8787A /* SettingViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -399,7 +427,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		DC33E1292C0EFDF800B8787A /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+		DC762C232C16E9880050354F /* XCRemoteSwiftPackageReference "SnapKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
 			requirement = {
@@ -407,13 +435,39 @@
 				minimumVersion = 5.7.1;
 			};
 		};
+		DC762C262C16ECE20050354F /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.9.1;
+			};
+		};
+		DC762C2B2C1719A30050354F /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.11.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		DC33E12A2C0EFDF800B8787A /* SnapKit */ = {
+		DC762C242C16E9880050354F /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = DC33E1292C0EFDF800B8787A /* XCRemoteSwiftPackageReference "SnapKit" */;
+			package = DC762C232C16E9880050354F /* XCRemoteSwiftPackageReference "SnapKit" */;
 			productName = SnapKit;
+		};
+		DC762C272C16ECE20050354F /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DC762C262C16ECE20050354F /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
+		DC762C2C2C1719A30050354F /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DC762C2B2C1719A30050354F /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
