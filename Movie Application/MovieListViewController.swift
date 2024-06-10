@@ -58,6 +58,7 @@ class MovieListViewController: UIViewController {
         
         view.backgroundColor = .white
         movieTableView.rowHeight = 430
+        movieTableView.separatorStyle = .none
         
         
         let leftItem = UIBarButtonItem(image: UIImage(systemName: "book"), style: .plain, target: self, action: #selector(listButtonClicked))

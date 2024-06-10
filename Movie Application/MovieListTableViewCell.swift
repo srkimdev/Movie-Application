@@ -15,6 +15,7 @@ class MovieListTableViewCell: UITableViewCell {
     let hashLabel = UILabel()
     
     let infoView = UIView()
+    let shadowView = UIView()
     
     let clipImage = UIImageView()
     let movieImage = UIImageView()
@@ -45,6 +46,8 @@ class MovieListTableViewCell: UITableViewCell {
         
         contentView.addSubview(dateLabel)
         contentView.addSubview(hashLabel)
+        
+        contentView.addSubview(shadowView)
         contentView.addSubview(infoView)
         
         contentView.addSubview(movieImage)
@@ -75,6 +78,13 @@ class MovieListTableViewCell: UITableViewCell {
             make.leading.equalTo(contentView.safeAreaLayoutGuide).offset(16)
             make.trailing.equalTo(contentView.safeAreaLayoutGuide)
             make.height.equalTo(20)
+        }
+        
+        shadowView.snp.makeConstraints { make in
+            make.top.equalTo(hashLabel.snp.bottom).offset(12)
+            make.leading.equalTo(contentView.safeAreaLayoutGuide).offset(16)
+            make.trailing.equalTo(contentView.safeAreaLayoutGuide).offset(-16)
+            make.bottom.equalTo(contentView.safeAreaLayoutGuide).offset(-16)
         }
         
         infoView.snp.makeConstraints { make in
@@ -157,18 +167,24 @@ class MovieListTableViewCell: UITableViewCell {
         hashLabel.text = "#Mystery"
         hashLabel.font = .boldSystemFont(ofSize: 18)
         
+        shadowView.backgroundColor = .white
+        shadowView.layer.shadowColor = UIColor.black.cgColor
+        shadowView.layer.shadowOffset = CGSize(width: 0, height: 10)
+        shadowView.layer.shadowRadius = 10
+        shadowView.layer.shadowOpacity = 0.5
+        
         infoView.layer.cornerRadius = 10
         infoView.backgroundColor = .orange
         
-        movieImage.backgroundColor = .blue
+        movieImage.layer.masksToBounds = true
+        movieImage.layer.cornerRadius = 10
+        movieImage.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         
         clipImage.backgroundColor = .white
         clipImage.image = UIImage(systemName: "paperclip")
         clipImage.tintColor = .black
-//        clipImage.contentMode = .scaleAspectFit
         clipImage.layer.masksToBounds = true
         clipImage.layer.cornerRadius = 12
-        
         
         rateLabel1.backgroundColor = #colorLiteral(red: 0.3468087614, green: 0.3369399607, blue: 0.8411970139, alpha: 1)
         rateLabel1.text = "평점"
@@ -176,8 +192,9 @@ class MovieListTableViewCell: UITableViewCell {
         rateLabel1.font = .systemFont(ofSize: 12)
         rateLabel1.textAlignment = .center
 
-        rateLabel2.backgroundColor = .black
-        rateLabel2.text = "3.3"
+        rateLabel2.backgroundColor = .white
+        rateLabel2.font = .systemFont(ofSize: 12)
+        rateLabel2.textAlignment = .center
         
         movieTitleLabel.font = .systemFont(ofSize: 18)
         characterLabel.font = .systemFont(ofSize: 15)
@@ -200,7 +217,9 @@ class MovieListTableViewCell: UITableViewCell {
         let url = URL(string: "https://image.tmdb.org/t/p/w780" + transition.poster_path)
         movieImage.kf.setImage(with: url)
 
-//        rateLabel2.text = String(transition.vote_average)
+        let number = transition.vote_average
+        let formattedNumber = String(format: "%.1f", number)
+        rateLabel2.text = formattedNumber
         
     }
     
