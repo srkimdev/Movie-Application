@@ -49,8 +49,8 @@ class MovieListTableViewCell: UITableViewCell {
         
         contentView.addSubview(shadowView)
         contentView.addSubview(infoView)
-        
-        contentView.addSubview(movieImage)
+
+        infoView.addSubview(movieImage)
         contentView.addSubview(clipImage)
         contentView.addSubview(rateLabel1)
         contentView.addSubview(rateLabel2)
@@ -169,16 +169,12 @@ class MovieListTableViewCell: UITableViewCell {
         
         shadowView.backgroundColor = .white
         shadowView.layer.shadowColor = UIColor.black.cgColor
-        shadowView.layer.shadowOffset = CGSize(width: 0, height: 10)
         shadowView.layer.shadowRadius = 10
+        shadowView.layer.cornerRadius = 10
         shadowView.layer.shadowOpacity = 0.5
         
         infoView.layer.cornerRadius = 10
-        infoView.backgroundColor = .orange
-        
-        movieImage.layer.masksToBounds = true
-        movieImage.layer.cornerRadius = 10
-        movieImage.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+        infoView.layer.masksToBounds = true
         
         clipImage.backgroundColor = .white
         clipImage.image = UIImage(systemName: "paperclip")
@@ -197,7 +193,8 @@ class MovieListTableViewCell: UITableViewCell {
         rateLabel2.textAlignment = .center
         
         movieTitleLabel.font = .systemFont(ofSize: 18)
-        characterLabel.font = .systemFont(ofSize: 15)
+        characterLabel.font = .systemFont(ofSize: 13)
+        characterLabel.textColor = .darkGray
         
         line.backgroundColor = .black
         
@@ -223,12 +220,13 @@ class MovieListTableViewCell: UITableViewCell {
         
     }
     
-//    func designCell(transition: [String]) {
-//        
-//        var temp = ""
-//        for item in transition {
-//            temp += item + ", "
-//        }
-//        characterLabel.text = temp
-//    }
+    func designCell(transition: [String]) {
+        
+        var temp = ""
+        for item in transition {
+            temp += item + ", "
+        }
+        print(temp)
+        characterLabel.text = temp
+    }
 }

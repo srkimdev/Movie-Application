@@ -17,6 +17,8 @@
 		DC33E1312C0F0B5000B8787A /* MainScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC33E1302C0F0B5000B8787A /* MainScreenViewController.swift */; };
 		DC33E1332C0F37EB00B8787A /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC33E1322C0F37EB00B8787A /* TabBarViewController.swift */; };
 		DC33E1352C0F388000B8787A /* MovieListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC33E1342C0F388000B8787A /* MovieListViewController.swift */; };
+		DC4008032C184D2C000E0F60 /* MovieCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC4008022C184D2C000E0F60 /* MovieCollectionViewController.swift */; };
+		DC4008052C184DDD000E0F60 /* MovieCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC4008042C184DDD000E0F60 /* MovieCollectionViewCell.swift */; };
 		DC762C252C16E9880050354F /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = DC762C242C16E9880050354F /* SnapKit */; };
 		DC762C282C16ECE20050354F /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = DC762C272C16ECE20050354F /* Alamofire */; };
 		DC762C2A2C16EED40050354F /* movieStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC762C292C16EED40050354F /* movieStruct.swift */; };
@@ -38,6 +40,8 @@
 		DC33E1302C0F0B5000B8787A /* MainScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenViewController.swift; sourceTree = "<group>"; };
 		DC33E1322C0F37EB00B8787A /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
 		DC33E1342C0F388000B8787A /* MovieListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieListViewController.swift; sourceTree = "<group>"; };
+		DC4008022C184D2C000E0F60 /* MovieCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCollectionViewController.swift; sourceTree = "<group>"; };
+		DC4008042C184DDD000E0F60 /* MovieCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCollectionViewCell.swift; sourceTree = "<group>"; };
 		DC762C292C16EED40050354F /* movieStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = movieStruct.swift; sourceTree = "<group>"; };
 		DCACAF4B2C16D51400D0ECD1 /* ReusableProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReusableProtocol.swift; sourceTree = "<group>"; };
 		DCACAF4D2C16D56700D0ECD1 /* MovieListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieListTableViewCell.swift; sourceTree = "<group>"; };
@@ -89,6 +93,8 @@
 				DC33E1302C0F0B5000B8787A /* MainScreenViewController.swift */,
 				DC33E1342C0F388000B8787A /* MovieListViewController.swift */,
 				DCACAF4D2C16D56700D0ECD1 /* MovieListTableViewCell.swift */,
+				DC4008022C184D2C000E0F60 /* MovieCollectionViewController.swift */,
+				DC4008042C184DDD000E0F60 /* MovieCollectionViewCell.swift */,
 			);
 			path = "Movie Application";
 			sourceTree = "<group>";
@@ -184,7 +190,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				DC33E1312C0F0B5000B8787A /* MainScreenViewController.swift in Sources */,
+				DC4008032C184D2C000E0F60 /* MovieCollectionViewController.swift in Sources */,
 				DC33E11A2C0EFBF700B8787A /* ViewController.swift in Sources */,
+				DC4008052C184DDD000E0F60 /* MovieCollectionViewCell.swift in Sources */,
 				DC33E1352C0F388000B8787A /* MovieListViewController.swift in Sources */,
 				DC762C2A2C16EED40050354F /* movieStruct.swift in Sources */,
 				DC33E1162C0EFBF700B8787A /* AppDelegate.swift in Sources */,

@@ -12,8 +12,15 @@ import Alamofire
 class MovieListViewController: UIViewController {
 
     let movieTableView = UITableView()
+    
     var movies1: [MovieInfo] = []
-    var characters: [[String]] = []
+    
+    var characters: [[String]] = [] {
+        didSet {
+            movieTableView.reloadData()
+        }
+    }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,13 +29,6 @@ class MovieListViewController: UIViewController {
         configureLayout()
         configureUI()
         callRequest1()
-        
-        
-//        for item in movies1 {
-//            callRequest2(id: item.id)
-//        }
-//        
-//        print(characters)
         
         movieTableView.delegate = self
         movieTableView.dataSource = self
@@ -83,11 +83,13 @@ class MovieListViewController: UIViewController {
             
             switch response.result {
             case .success(let value):
-                
-                print(value)
+
                 self.movies1 = value.results
-                self.movieTableView.reloadData()
-               
+                
+                for item in self.movies1 {
+                    self.callRequest2(id: item.id)
+                }
+            
             case .failure(let error):
                 print(error)
             }
@@ -108,17 +110,19 @@ class MovieListViewController: UIViewController {
             
             switch response.result {
             case .success(let value):
-                print(value)
+                
                 let temp = value.cast
                 var movie: [String] = []
-                
+
                 for item in temp {
                     movie.append(item.character)
                 }
-                
+               
                 self.characters.append(movie)
-                
+                                
                 self.movieTableView.reloadData()
+                
+                print(self.movies1.count)
                
             case .failure(let error):
                 print(error)
@@ -143,7 +147,7 @@ class MovieListViewController: UIViewController {
 extension MovieListViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return movies1.count
+        return characters.count // characters.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -152,9 +156,9 @@ extension MovieListViewController: UITableViewDelegate, UITableViewDataSource {
         cell.separatorInset.left = 0.0
         
         let movie = movies1[indexPath.row]
-//        let movie2 = movies2[indexPath.row]
+        
         cell.designCell(transition: movie)
-//        cell.designCell(transition: characters[indexPath.row])
+        cell.designCell(transition: characters[indexPath.row])
         
         
         return cell
