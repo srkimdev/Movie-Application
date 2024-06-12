@@ -164,7 +164,7 @@ class MovieListTableViewCell: UITableViewCell {
         dateLabel.textColor = .gray
         dateLabel.font = .systemFont(ofSize: 12)
         
-        hashLabel.text = "#Mystery"
+//        hashLabel.text = "#Mystery"
         hashLabel.font = .boldSystemFont(ofSize: 18)
         
         shadowView.backgroundColor = .white
@@ -218,15 +218,16 @@ class MovieListTableViewCell: UITableViewCell {
         let formattedNumber = String(format: "%.1f", number)
         rateLabel2.text = formattedNumber
         
+        let genreNames = transition.genre_ids.compactMap { Genre.genres[$0] }
+        let joinedGenres = genreNames.joined(separator: ", ")
+        hashLabel.text = joinedGenres
+        
     }
     
     func designCell(transition: [String]) {
         
-        var temp = ""
-        for item in transition {
-            temp += item + ", "
-        }
-        print(temp)
-        characterLabel.text = temp
+        let joinedString = transition.joined(separator: ", ")
+        characterLabel.text = joinedString
+        
     }
 }

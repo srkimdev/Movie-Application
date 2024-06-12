@@ -21,7 +21,6 @@ class MovieListViewController: UIViewController {
         }
     }
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -32,7 +31,6 @@ class MovieListViewController: UIViewController {
         
         movieTableView.delegate = self
         movieTableView.dataSource = self
-        
         movieTableView.register(MovieListTableViewCell.self, forCellReuseIdentifier: MovieListTableViewCell.identifier)
         
     }
@@ -61,12 +59,19 @@ class MovieListViewController: UIViewController {
         movieTableView.separatorStyle = .none
         
         
-        let leftItem = UIBarButtonItem(image: UIImage(systemName: "book"), style: .plain, target: self, action: #selector(listButtonClicked))
+        let leftItem = UIBarButtonItem(image: UIImage(systemName: "book"), style: .plain, target: self, action: nil)
         navigationItem.leftBarButtonItem = leftItem
         
-        let rightItem = UIBarButtonItem(image: UIImage(systemName: "magnifyingglass"), style: .plain, target: self, action: #selector(searchButtonClicked))
+        let rightItem = UIBarButtonItem(image: UIImage(systemName: "magnifyingglass"), style: .plain, target: self, action: nil)
         
         navigationItem.rightBarButtonItem = rightItem
+        
+    }
+    
+    @objc func nextButtonClicked() {
+        
+        let vc = MovieInfoViewController()
+        navigationController?.pushViewController(vc, animated: true)
         
     }
     
@@ -119,10 +124,7 @@ class MovieListViewController: UIViewController {
                 }
                
                 self.characters.append(movie)
-                                
                 self.movieTableView.reloadData()
-                
-                print(self.movies1.count)
                
             case .failure(let error):
                 print(error)
@@ -130,24 +132,13 @@ class MovieListViewController: UIViewController {
         }
         
     }
-    
-    
-    @objc func searchButtonClicked() {
-        
-        
-    }
-    
-    @objc func listButtonClicked() {
-        
-        
-    }
-    
+
 }
 
 extension MovieListViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return characters.count // characters.count
+        return characters.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -157,9 +148,9 @@ extension MovieListViewController: UITableViewDelegate, UITableViewDataSource {
         
         let movie = movies1[indexPath.row]
         
+        cell.nextButton.addTarget(self, action: #selector(nextButtonClicked), for: .touchUpInside)
         cell.designCell(transition: movie)
         cell.designCell(transition: characters[indexPath.row])
-        
         
         return cell
     }
