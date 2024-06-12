@@ -15,7 +15,9 @@ struct MovieTotal: Decodable {
 
 struct MovieInfo: Decodable {
     
+    let backdrop_path: String
     let id: Int
+    let overview: String
     let poster_path: String
     let title: String
     let genre_ids: [Int]
@@ -58,6 +60,8 @@ struct MovieTotal2: Decodable {
 
 struct MovieInfo2: Decodable {
     
+    let name: String
+    let profile_path: String?
     let character: String
     
 }

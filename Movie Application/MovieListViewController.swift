@@ -14,6 +14,15 @@ class MovieListViewController: UIViewController {
     let movieTableView = UITableView()
     
     var movies1: [MovieInfo] = []
+    var movies2: [[MovieInfo2]] = []
+    
+//    struct MovieInfo2: Decodable {
+    //
+    //        let name: String
+    //        let profile_path: String
+    //        let character: String
+    //
+    //    }
     
     var characters: [[String]] = [] {
         didSet {
@@ -68,9 +77,9 @@ class MovieListViewController: UIViewController {
         
     }
     
-    @objc func nextButtonClicked() {
+    @objc func nextButtonClicked(sender: UIButton) {
         
-        let vc = MovieInfoViewController()
+        let vc = MovieInfoViewController(list: movies1[sender.tag], list2: movies2[sender.tag])
         navigationController?.pushViewController(vc, animated: true)
         
     }
@@ -117,6 +126,8 @@ class MovieListViewController: UIViewController {
             case .success(let value):
                 
                 let temp = value.cast
+                self.movies2.append(temp)
+                
                 var movie: [String] = []
 
                 for item in temp {
@@ -147,6 +158,7 @@ extension MovieListViewController: UITableViewDelegate, UITableViewDataSource {
         cell.separatorInset.left = 0.0
         
         let movie = movies1[indexPath.row]
+        cell.nextButton.tag = indexPath.row
         
         cell.nextButton.addTarget(self, action: #selector(nextButtonClicked), for: .touchUpInside)
         cell.designCell(transition: movie)
