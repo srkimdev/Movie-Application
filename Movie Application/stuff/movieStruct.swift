@@ -75,10 +75,21 @@ struct MovieSearch: Decodable {
 
 struct MoviePoster: Decodable {
     
-    let poster_path: String?
+    let poster_path: String
     
 }
 
+struct RecommandMovie: Decodable {
+    
+    let results: [RecommandKind]?
+    
+}
+
+struct RecommandKind: Decodable {
+    
+    let poster_path: String?
+    
+}
 
 
 

@@ -1,17 +1,15 @@
 //
-//  MovieCollectionViewCell.swift
+//  RecommandMovieCollectionViewCell.swift
 //  Movie Application
 //
-//  Created by 김성률 on 6/11/24.
+//  Created by 김성률 on 6/24/24.
 //
 
 import UIKit
-import SnapKit
 import Kingfisher
+import SnapKit
 
-class MovieCollectionViewCell: UICollectionViewCell {
-    
-//    static let identifier = "MovieCollectionViewCell"
+class RecommandMovieCollectionViewCell: UICollectionViewCell {
     
     let movieImage = UIImageView()
     
@@ -22,37 +20,34 @@ class MovieCollectionViewCell: UICollectionViewCell {
         configureLayout()
         configureUI()
     }
-
+    
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
     func configureHierarchy() {
-        
         contentView.addSubview(movieImage)
-        
     }
     
     func configureLayout() {
         
         movieImage.snp.makeConstraints { make in
-            make.edges.equalTo(contentView)
+            make.edges.equalTo(contentView.safeAreaLayoutGuide)
         }
         
     }
     
     func configureUI() {
-        
-        movieImage.layer.masksToBounds = true
+        movieImage.backgroundColor = .black
         movieImage.layer.cornerRadius = 5
-        
+        movieImage.layer.masksToBounds = true
     }
     
-    func designCell(transition: MoviePoster) {
+    func designCell(transition: String) {
         
-        let url = URL(string: "https://image.tmdb.org/t/p/w780" + (transition.poster_path ?? ""))
+        let url = URL(string: "https://image.tmdb.org/t/p/w780" + transition)
         movieImage.kf.setImage(with: url)
         
     }
-    
 }

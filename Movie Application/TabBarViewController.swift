@@ -16,6 +16,7 @@ class TabBarViewController: UITabBarController {
         let setting = SettingViewController()
         let movie = MovieListViewController()
         let collection = MovieCollectionViewController()
+        let recommand = RecommandMovieViewController()
         
         mainscreen.title = "홈"
         setting.title = "NEW & HOT"
@@ -31,7 +32,8 @@ class TabBarViewController: UITabBarController {
         let navigationSetting = UINavigationController(rootViewController: setting)
         let navigationMovie = UINavigationController(rootViewController: movie)
         let navigationCollection = UINavigationController(rootViewController: collection)
+        let navigationRecommand = UINavigationController(rootViewController: recommand)
         
-        setViewControllers([navigationHome, navigationSetting, navigationMovie, navigationCollection], animated: false)
+        setViewControllers([navigationHome, navigationSetting, navigationMovie, navigationCollection, navigationRecommand], animated: false)
     }
 }
