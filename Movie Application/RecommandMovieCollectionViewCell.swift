@@ -44,9 +44,9 @@ class RecommandMovieCollectionViewCell: UICollectionViewCell {
         movieImage.layer.masksToBounds = true
     }
     
-    func designCell(transition: String) {
+    func designCell(transition: RecommandKind) {
         
-        let url = URL(string: "https://image.tmdb.org/t/p/w780" + transition)
+        let url = URL(string: "https://image.tmdb.org/t/p/w780" + (transition.poster_path ?? ""))
         movieImage.kf.setImage(with: url)
         
     }

@@ -12,25 +12,20 @@ import Alamofire
 class RecommandMovieViewController: UIViewController {
 
     let movieTitle = UILabel()
-    let similarMovieTitle = UILabel()
-    let recommandMovieTitle = UILabel()
+    let category = ["추천 영화", "비슷한 영화"]
+
+    lazy var movieTableView = {
+        let view = UITableView()
+        view.delegate = self
+        view.dataSource = self
+        view.register(RecommandMovieTableViewCell.self, forCellReuseIdentifier: RecommandMovieTableViewCell.identifier)
+        view.rowHeight = 190
+        view.backgroundColor = .black
+        return view
+    }()
     
-    lazy var similarCollectionView = UICollectionView(frame: .zero, collectionViewLayout: collectionViewLayout())
-    lazy var recommandCollectionView = UICollectionView(frame: .zero, collectionViewLayout: collectionViewLayout())
-    
-    func collectionViewLayout() -> UICollectionViewLayout {
-        let layout = UICollectionViewFlowLayout()
-        layout.itemSize = CGSize(width: 104, height: 150)
-        layout.scrollDirection = .horizontal
-        layout.minimumInteritemSpacing = 10
-        layout.sectionInset = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
-        
-        return layout
-    }
-    
-    var page = 1
-    var list1: [String] = []
-    var list2: [String] = []
+    var imageList: [[RecommandKind]] = [[RecommandKind(poster_path: "")],
+                                        [RecommandKind(poster_path: "")]]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,48 +33,45 @@ class RecommandMovieViewController: UIViewController {
         configureHierarchy()
         configureLayout()
         configureUI()
+    
+        let group = DispatchGroup()
         
-        similarCollectionView.dataSource = self
-        similarCollectionView.delegate = self
-        
-        recommandCollectionView.dataSource = self
-        recommandCollectionView.delegate = self
-        
-        similarCollectionView.register(RecommandMovieCollectionViewCell.self, forCellWithReuseIdentifier: RecommandMovieCollectionViewCell.identifier)
-        recommandCollectionView.register(RecommandMovieCollectionViewCell.self, forCellWithReuseIdentifier: RecommandMovieCollectionViewCell.identifier)
-        
-        callRequest(urlString: "similar") { value in
-            var filterList: [String] = []
-            
-            for i in value.results! {
-                filterList.append(i.poster_path ?? "")
+        group.enter()
+        DispatchQueue.global().async(group: group) {
+            self.callRequest(urlString: "similar") { value in
+                var filterList: [RecommandKind] = []
+                
+                for i in value.results! {
+                    filterList.append(i)
+                }
+                self.imageList[0] = filterList
+                group.leave()
             }
-            self.list1 = filterList
-
-            self.similarCollectionView.reloadData()
-
         }
         
-        callRequest(urlString: "recommand") { value in
-            var filterList: [String] = []
-        
-            for i in value.results! {
-                filterList.append(i.poster_path ?? "")
-            }
-            self.list2 = filterList
+        group.enter()
+        DispatchQueue.global().async(group: group) {
+            self.callRequest(urlString: "recommand") { value in
+                var filterList: [RecommandKind] = []
             
-            self.recommandCollectionView.reloadData()
-
+                for i in value.results! {
+                    filterList.append(i)
+                }
+                self.imageList[1] = filterList
+                group.leave()
+            }
         }
+        
+        group.notify(queue: .main) {
+            self.movieTableView.reloadData()
+        }
+        
     }
     
     func configureHierarchy() {
         
         view.addSubview(movieTitle)
-        view.addSubview(similarMovieTitle)
-        view.addSubview(similarCollectionView)
-        view.addSubview(recommandMovieTitle)
-        view.addSubview(recommandCollectionView)
+        view.addSubview(movieTableView)
         
     }
     
@@ -91,28 +83,9 @@ class RecommandMovieViewController: UIViewController {
             make.height.equalTo(30)
         }
         
-        similarMovieTitle.snp.makeConstraints { make in
-            make.top.equalTo(movieTitle.snp.bottom).offset(20)
-            make.horizontalEdges.equalTo(view.safeAreaLayoutGuide).offset(8)
-            make.height.equalTo(24)
-        }
-        
-        similarCollectionView.snp.makeConstraints { make in
-            make.top.equalTo(similarMovieTitle.snp.bottom).offset(8)
-            make.horizontalEdges.equalTo(view.safeAreaLayoutGuide)
-            make.height.equalTo(160)
-        }
-        
-        recommandMovieTitle.snp.makeConstraints { make in
-            make.top.equalTo(similarCollectionView.snp.bottom).offset(16)
-            make.horizontalEdges.equalTo(view.safeAreaLayoutGuide).offset(8)
-            make.height.equalTo(24)
-        }
-        
-        recommandCollectionView.snp.makeConstraints { make in
-            make.top.equalTo(recommandMovieTitle.snp.bottom).offset(8)
-            make.horizontalEdges.equalTo(view.safeAreaLayoutGuide)
-            make.height.equalTo(160)
+        movieTableView.snp.makeConstraints { make in
+            make.top.equalTo(movieTitle.snp.bottom).offset(8)
+            make.horizontalEdges.bottom.equalTo(view.safeAreaLayoutGuide)
         }
         
     }
@@ -125,17 +98,7 @@ class RecommandMovieViewController: UIViewController {
         movieTitle.textColor = .white
         movieTitle.font = .systemFont(ofSize: 25, weight: .bold)
         
-        similarMovieTitle.text = "비슷한 영화"
-        similarMovieTitle.textColor = .white
-        similarMovieTitle.font = .systemFont(ofSize: 20, weight: .bold)
-        
-        similarCollectionView.backgroundColor = .red
-        
-        recommandMovieTitle.text = "추천 영화"
-        recommandMovieTitle.textColor = .white
-        recommandMovieTitle.font = .systemFont(ofSize: 20, weight: .bold)
-        
-        recommandCollectionView.backgroundColor = .blue
+        movieTableView.backgroundColor = .black
         
     }
     
@@ -170,36 +133,48 @@ class RecommandMovieViewController: UIViewController {
 
 }
 
+extension RecommandMovieViewController: UITableViewDelegate, UITableViewDataSource {
+    
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+        return imageList.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        let cell = movieTableView.dequeueReusableCell(withIdentifier: RecommandMovieTableViewCell.identifier, for: indexPath) as! RecommandMovieTableViewCell
+        
+        cell.collectionView.dataSource = self
+        cell.collectionView.delegate = self
+        cell.collectionView.tag = indexPath.row
+        cell.collectionView.register(RecommandMovieCollectionViewCell.self, forCellWithReuseIdentifier: RecommandMovieCollectionViewCell.identifier)
+        cell.collectionView.reloadData()
+        
+        cell.designCell(text: category[indexPath.row])
+        
+        return cell
+    }
+    
+}
+
 extension RecommandMovieViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
-        if collectionView == similarCollectionView {
-            return list1.count
-        } else {
-            return list2.count
-        }
+        return imageList[collectionView.tag].count
         
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        if collectionView == similarCollectionView {
-            let cell = similarCollectionView.dequeueReusableCell(withReuseIdentifier: RecommandMovieCollectionViewCell.identifier, for: indexPath) as! RecommandMovieCollectionViewCell
-            
-            cell.designCell(transition: list1[indexPath.item])
-            
-            return cell
-        } else {
-            
-            let cell = recommandCollectionView.dequeueReusableCell(withReuseIdentifier: RecommandMovieCollectionViewCell.identifier, for: indexPath) as! RecommandMovieCollectionViewCell
-            
-            cell.designCell(transition: list2[indexPath.item])
-            
-            return cell
-        }
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RecommandMovieCollectionViewCell.identifier, for: indexPath) as! RecommandMovieCollectionViewCell
         
+        let data = imageList[collectionView.tag][indexPath.item]
         
+        cell.designCell(transition: data)
+        
+        return cell
     }
 
 }
