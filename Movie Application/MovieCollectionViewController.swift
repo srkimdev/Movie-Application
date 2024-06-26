@@ -15,7 +15,11 @@ class MovieCollectionViewController: UIViewController {
     
     let searchBar = UISearchBar()
     
-    var list = MovieSearch(total_pages: 0, results: [])
+    var list = MovieSearch(
+        total_pages: 0,
+        results: []
+    )
+    
     var page = 1
     
     func collectionViewLayout() -> UICollectionViewLayout {
@@ -87,8 +91,9 @@ class MovieCollectionViewController: UIViewController {
             switch response.result {
                 
             case .success(let value):
-
-                var filterList = [MoviePoster]()
+                dump(value)
+                
+                var filterList: [MoviePoster] = []
                 
                 if self.page == 1 {
                     
@@ -97,7 +102,9 @@ class MovieCollectionViewController: UIViewController {
                             filterList.append(i)
                         }
                     }
+                    
                     self.list.results = filterList
+                    
                 } else {
                     
                     for i in value.results {
@@ -105,17 +112,20 @@ class MovieCollectionViewController: UIViewController {
                             filterList.append(i)
                         }
                     }
+                    
                     self.list.results.append(contentsOf: filterList)
                 }
                 
                 self.movieCollectionView.reloadData()
                 
                 if self.page == 1 {
-                    self.movieCollectionView.scrollToItem(at: IndexPath(row: 0, section: 0), at: .top, animated: false)
+                    self.movieCollectionView.scrollToItem(at: IndexPath(row: 0,section: 0),at: .top,
+                        animated: false
+                    )
                 }
-            
+                
             case .failure(let error):
-                print(error)
+                print("실패")
             }
         }
         
@@ -135,10 +145,11 @@ extension MovieCollectionViewController: UICollectionViewDelegate, UICollectionV
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MovieCollectionViewCell.identifier, for: indexPath) as! MovieCollectionViewCell
         
         let data = list.results[indexPath.row]
+        
         if data != nil {
             cell.designCell(transition: data)
         }
-
+        
         return cell
     }
     
@@ -154,24 +165,23 @@ extension MovieCollectionViewController: UICollectionViewDataSourcePrefetching {
                 if list.total_pages != page {
                     callRequest(text: searchBar.text!)
                 }
-                
             }
             
         }
         
     }
     
-    
 }
 
 extension MovieCollectionViewController: UISearchBarDelegate {
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        
         page = 1
         callRequest(text: searchBar.text!)
 
     }
     
 }
+
+
 

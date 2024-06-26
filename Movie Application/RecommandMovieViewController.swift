@@ -3,7 +3,7 @@
 //  Movie Application
 //
 //  Created by 김성률 on 6/24/24.
-//
+
 
 import UIKit
 import SnapKit
@@ -38,28 +38,38 @@ class RecommandMovieViewController: UIViewController {
         
         group.enter()
         DispatchQueue.global().async(group: group) {
-            self.callRequest(urlString: "similar") { value in
+            TMDBAPI.shared.communicationRe(api: APIRequest.similar(query: "710295")) { value in
                 var filterList: [RecommandKind] = []
-                
-                for i in value.results! {
+            
+                for i in value {
                     filterList.append(i)
                 }
                 self.imageList[0] = filterList
+                
                 group.leave()
+                
+            } errorHandler: { value in
+                print(value)
             }
+
         }
         
         group.enter()
         DispatchQueue.global().async(group: group) {
-            self.callRequest(urlString: "recommand") { value in
+            TMDBAPI.shared.communicationRe(api: APIRequest.recommand(query: "940721")) { value in
                 var filterList: [RecommandKind] = []
-            
-                for i in value.results! {
+                
+                for i in value {
                     filterList.append(i)
                 }
                 self.imageList[1] = filterList
+                
                 group.leave()
+                
+            } errorHandler: { value in
+                print(value)
             }
+
         }
         
         group.notify(queue: .main) {
@@ -99,35 +109,6 @@ class RecommandMovieViewController: UIViewController {
         movieTitle.font = .systemFont(ofSize: 25, weight: .bold)
         
         movieTableView.backgroundColor = .black
-        
-    }
-    
-    func callRequest(urlString: String, completionHandler: @escaping (RecommandMovie) -> Void) {
-        
-        var url = ""
-        
-        if urlString == "similar" {
-            url = "https://api.themoviedb.org/3/movie/710295/similar"
-        } else {
-            url = "https://api.themoviedb.org/3/movie/940721/recommendations"
-        }
-        
-        let header: HTTPHeaders = [
-            "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJmMWZlZDlhZDI4M2YwNmQ2OGM5MmQ0OGU5YjY5MzM1NSIsInN1YiI6IjY2NjU5YWJmYTJiNTYwOGZiOTEzODA3MiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.DsjHLjeT2yEYwT6Jy_u8IZip2TJuqLKbigAjKaiz0jo",
-            "accept": "application/json"
-        ]
-
-        AF.request(url, method: .get, headers: header).responseDecodable(of: RecommandMovie.self) { response in
-            
-            switch response.result {
-                
-            case .success(let value):
-                completionHandler(value)
-            
-            case .failure(let error):
-                print(error)
-            }
-        }
         
     }
 

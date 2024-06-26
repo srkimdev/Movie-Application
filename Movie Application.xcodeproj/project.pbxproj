@@ -23,6 +23,7 @@
 		DC487CB32C1980B7006B7AAF /* MovieInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC487CB22C1980B7006B7AAF /* MovieInfoTableViewCell.swift */; };
 		DC487CB52C19977C006B7AAF /* MovieInfo2TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC487CB42C19977C006B7AAF /* MovieInfo2TableViewCell.swift */; };
 		DC67AD242C2AABB100A5129F /* RecommandMovieTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC67AD232C2AABB100A5129F /* RecommandMovieTableViewCell.swift */; };
+		DC67AD312C2BE73900A5129F /* TMDBAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC67AD302C2BE73900A5129F /* TMDBAPI.swift */; };
 		DC762C252C16E9880050354F /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = DC762C242C16E9880050354F /* SnapKit */; };
 		DC762C282C16ECE20050354F /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = DC762C272C16ECE20050354F /* Alamofire */; };
 		DC762C2A2C16EED40050354F /* movieStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC762C292C16EED40050354F /* movieStruct.swift */; };
@@ -52,6 +53,7 @@
 		DC487CB22C1980B7006B7AAF /* MovieInfoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieInfoTableViewCell.swift; sourceTree = "<group>"; };
 		DC487CB42C19977C006B7AAF /* MovieInfo2TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieInfo2TableViewCell.swift; sourceTree = "<group>"; };
 		DC67AD232C2AABB100A5129F /* RecommandMovieTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommandMovieTableViewCell.swift; sourceTree = "<group>"; };
+		DC67AD302C2BE73900A5129F /* TMDBAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TMDBAPI.swift; sourceTree = "<group>"; };
 		DC762C292C16EED40050354F /* movieStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = movieStruct.swift; sourceTree = "<group>"; };
 		DC9B93392C2984FA0086AA21 /* RecommandMovieViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommandMovieViewController.swift; sourceTree = "<group>"; };
 		DC9B933D2C298B020086AA21 /* RecommandMovieCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommandMovieCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -122,6 +124,7 @@
 			children = (
 				DCACAF4B2C16D51400D0ECD1 /* ReusableProtocol.swift */,
 				DC762C292C16EED40050354F /* movieStruct.swift */,
+				DC67AD302C2BE73900A5129F /* TMDBAPI.swift */,
 			);
 			path = stuff;
 			sourceTree = "<group>";
@@ -214,6 +217,7 @@
 				DC4008052C184DDD000E0F60 /* MovieCollectionViewCell.swift in Sources */,
 				DC9B933E2C298B020086AA21 /* RecommandMovieCollectionViewCell.swift in Sources */,
 				DC33E1352C0F388000B8787A /* MovieListViewController.swift in Sources */,
+				DC67AD312C2BE73900A5129F /* TMDBAPI.swift in Sources */,
 				DC762C2A2C16EED40050354F /* movieStruct.swift in Sources */,
 				DC33E1162C0EFBF700B8787A /* AppDelegate.swift in Sources */,
 				DC487CB52C19977C006B7AAF /* MovieInfo2TableViewCell.swift in Sources */,
@@ -374,6 +378,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = VC8Q8WBRQ3;
@@ -392,6 +397,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "srkimdev.Movie-Application";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
@@ -407,6 +413,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = VC8Q8WBRQ3;
@@ -425,6 +432,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "srkimdev.Movie-Application";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;

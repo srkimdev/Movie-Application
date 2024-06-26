@@ -12,6 +12,8 @@ class TabBarViewController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        UITabBar.appearance().backgroundColor = .white
+        
         let mainscreen = MainScreenViewController()
         let setting = SettingViewController()
         let movie = MovieListViewController()
@@ -22,11 +24,13 @@ class TabBarViewController: UITabBarController {
         setting.title = "NEW & HOT"
         movie.title = "저장한 콘텐츠 목록"
         collection.title = "영화 검색"
+        recommand.title = "연관된 영화"
         
         mainscreen.tabBarItem.image = UIImage.init(systemName: "house")
         setting.tabBarItem.image = UIImage.init(systemName: "magnifyingglass")
         movie.tabBarItem.image = UIImage.init(systemName: "book")
         collection.tabBarItem.image = UIImage.init(systemName: "plus")
+        recommand.tabBarItem.image = UIImage(systemName: "chevron.right")
         
         let navigationHome = UINavigationController(rootViewController: mainscreen)
         let navigationSetting = UINavigationController(rootViewController: setting)
