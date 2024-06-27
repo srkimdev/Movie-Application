@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class RecommandMovieTableViewCell: UITableViewCell {
+class RecommandMovieTableViewCell: BaseTableViewCell {
     
     let titleLabel = {
         let view = UILabel()
@@ -32,23 +32,15 @@ class RecommandMovieTableViewCell: UITableViewCell {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        
-        configureHierarchy()
-        configureLayout()
-        configureUI()
-        
+
     }
     
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    func configureHierarchy() {
+    override func configureHierarchy() {
         contentView.addSubview(titleLabel)
         contentView.addSubview(collectionView)
     }
     
-    func configureLayout() {
+    override func configureLayout() {
         
         titleLabel.snp.makeConstraints { make in
             make.height.equalTo(30)
@@ -62,7 +54,7 @@ class RecommandMovieTableViewCell: UITableViewCell {
         }
     }
     
-    func configureUI() {
+    override func configureUI() {
         contentView.backgroundColor = .black
         collectionView.backgroundColor = .black
     }

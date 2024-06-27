@@ -9,20 +9,12 @@ import UIKit
 import SnapKit
 import Alamofire
 
-class MovieListViewController: UIViewController {
+class MovieListViewController: BaseViewController {
 
     let movieTableView = UITableView()
     
     var movies1: [MovieInfo] = []
     var movies2: [[MovieInfo2]] = []
-    
-//    struct MovieInfo2: Decodable {
-    //
-    //        let name: String
-    //        let profile_path: String
-    //        let character: String
-    //
-    //    }
     
     var characters: [[String]] = [] {
         didSet {
@@ -33,9 +25,6 @@ class MovieListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        configureHierarchy()
-        configureLayout()
-        configureUI()
         callRequest1()
         
         movieTableView.delegate = self
@@ -44,13 +33,13 @@ class MovieListViewController: UIViewController {
         
     }
     
-    func configureHierarchy() {
+    override func configureHierarchy() {
         
         view.addSubview(movieTableView)
         
     }
 
-    func configureLayout() {
+    override func configureLayout() {
         
         movieTableView.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide)
@@ -61,7 +50,7 @@ class MovieListViewController: UIViewController {
         
     }
 
-    func configureUI() {
+    override func configureUI() {
         
         view.backgroundColor = .white
         movieTableView.rowHeight = 430
@@ -70,8 +59,7 @@ class MovieListViewController: UIViewController {
         let leftItem = UIBarButtonItem(image: UIImage(systemName: "book"), style: .plain, target: self, action: nil)
         navigationItem.leftBarButtonItem = leftItem
         
-        let rightItem = UIBarButtonItem(image: UIImage(systemName: "magnifyingglass"), style: .plain, target: self, action: nil)
-        
+        let rightItem = UIBarButtonItem(image: UIImage(systemName: "magnifyingglass"), style: .plain, target: self, action: #selector(searchButtonClicked))
         navigationItem.rightBarButtonItem = rightItem
         
     }
@@ -79,6 +67,13 @@ class MovieListViewController: UIViewController {
     @objc func nextButtonClicked(sender: UIButton) {
         
         let vc = MovieInfoViewController(list: movies1[sender.tag], list2: movies2[sender.tag])
+        navigationController?.pushViewController(vc, animated: true)
+        
+    }
+    
+    @objc func searchButtonClicked() {
+        
+        let vc = MovieCollectionViewController()
         navigationController?.pushViewController(vc, animated: true)
         
     }

@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class MainScreenViewController: UIViewController {
+class MainScreenViewController: BaseViewController {
 
     let mainImage = UIImageView()
     let subImage1 = UIImageView()
@@ -26,14 +26,10 @@ class MainScreenViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        configureHierarchy()
-        configureLayout()
-        configureUI()
         
     }
     
-    func configureHierarchy() {
+    override func configureHierarchy() {
         view.addSubview(mainImage)
         view.addSubview(subImage1)
         view.addSubview(subImage2)
@@ -47,7 +43,7 @@ class MainScreenViewController: UIViewController {
         view.addSubview(playButton)
     }
     
-    func configureLayout() {
+    override func configureLayout() {
         
         mainImage.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide)
@@ -91,13 +87,10 @@ class MainScreenViewController: UIViewController {
             make.trailing.equalTo(playButtonUI.snp.trailing).offset(-16)
             make.bottom.equalTo(playButtonUI.snp.bottom).offset(-4)
             
-//
-//            make.height.equalTo(35)
         }
         
         playButtonUI.snp.makeConstraints { make in
             make.leading.equalTo(mainImage.snp.leading).offset(20)
-//            make.trailing.equalTo(mainImage.snp.leading).offset(-4)
             make.bottom.equalTo(mainImage.snp.bottom).offset(-20)
             make.height.equalTo(35)
             make.width.equalTo(155)
@@ -133,7 +126,7 @@ class MainScreenViewController: UIViewController {
         
     }
     
-    func configureUI() {
+    override func configureUI() {
         
         view.backgroundColor = .black
         navigationItem.title = "고래밥님"
@@ -177,8 +170,6 @@ class MainScreenViewController: UIViewController {
         genreList.textAlignment = .center
         genreList.font = .systemFont(ofSize: 15)
     }
-    
-    
 
 }
 

@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 import Alamofire
 
-class RecommandMovieViewController: UIViewController {
+class RecommandMovieViewController: BaseViewController {
 
     let movieTitle = UILabel()
     let category = ["추천 영화", "비슷한 영화"]
@@ -30,10 +30,6 @@ class RecommandMovieViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        configureHierarchy()
-        configureLayout()
-        configureUI()
-    
         let group = DispatchGroup()
         
         group.enter()
@@ -78,14 +74,14 @@ class RecommandMovieViewController: UIViewController {
         
     }
     
-    func configureHierarchy() {
+    override func configureHierarchy() {
         
         view.addSubview(movieTitle)
         view.addSubview(movieTableView)
         
     }
     
-    func configureLayout() {
+    override func configureLayout() {
         
         movieTitle.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide).offset(12)
@@ -100,7 +96,7 @@ class RecommandMovieViewController: UIViewController {
         
     }
     
-    func configureUI() {
+    override func configureUI() {
         
         view.backgroundColor = .black
         

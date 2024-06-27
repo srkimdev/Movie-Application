@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 import Kingfisher
 
-class MovieListTableViewCell: UITableViewCell {
+class MovieListTableViewCell: BaseTableViewCell {
 
     let dateLabel = UILabel()
     let hashLabel = UILabel()
@@ -30,19 +30,10 @@ class MovieListTableViewCell: UITableViewCell {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        
-        configureHierarchy()
-        configureLayout()
-        configureUI()
-        
+
     }
     
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    
-    func configureHierarchy() {
+    override func configureHierarchy() {
         
         contentView.addSubview(dateLabel)
         contentView.addSubview(hashLabel)
@@ -63,7 +54,7 @@ class MovieListTableViewCell: UITableViewCell {
         
     }
     
-    func configureLayout() {
+    override func configureLayout() {
         
         dateLabel.snp.makeConstraints { make in
             make.top.equalTo(contentView.safeAreaLayoutGuide).offset(20)
@@ -159,12 +150,11 @@ class MovieListTableViewCell: UITableViewCell {
         
     }
     
-    func configureUI() {
+    override func configureUI() {
         
         dateLabel.textColor = .gray
         dateLabel.font = .systemFont(ofSize: 12)
-        
-//        hashLabel.text = "#Mystery"
+
         hashLabel.font = .boldSystemFont(ofSize: 18)
         
         shadowView.backgroundColor = .white

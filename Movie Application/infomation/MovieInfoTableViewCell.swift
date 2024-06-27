@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class MovieInfoTableViewCell: UITableViewCell {
+class MovieInfoTableViewCell: BaseTableViewCell {
     
     let actorImage = UIImageView()
     let actorName = UILabel()
@@ -17,24 +17,16 @@ class MovieInfoTableViewCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
-        configureHierarchy()
-        configureLayout()
-        configureUI()
-        
     }
     
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    func configureHierarchy() {
+    override func configureHierarchy() {
         
         contentView.addSubview(actorImage)
         contentView.addSubview(actorName)
         contentView.addSubview(characterName)
     }
     
-    func configureLayout() {
+    override func configureLayout() {
         
         actorImage.snp.makeConstraints { make in
             make.top.equalTo(contentView.safeAreaLayoutGuide).offset(8)
@@ -59,7 +51,7 @@ class MovieInfoTableViewCell: UITableViewCell {
         
     }
     
-    func configureUI() {
+    override func configureUI() {
         
         actorImage.backgroundColor = .red
         actorImage.layer.masksToBounds = true

@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class MovieInfo2TableViewCell: UITableViewCell {
+class MovieInfo2TableViewCell: BaseTableViewCell {
     
     let overViewLabel = UILabel()
     let plusButton = UIButton()
@@ -17,22 +17,14 @@ class MovieInfo2TableViewCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
-        configureHierarchy()
-        configureLayout()
-        configureUI()
-        
     }
     
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    func configureHierarchy() {
+    override func configureHierarchy() {
         contentView.addSubview(overViewLabel)
         contentView.addSubview(plusButton)
     }
     
-    func configureLayout() {
+    override func configureLayout() {
         overViewLabel.snp.makeConstraints { make in
             make.top.equalTo(contentView.safeAreaLayoutGuide).offset(8)
             make.leading.equalTo(contentView.safeAreaLayoutGuide).offset(20)
@@ -49,7 +41,7 @@ class MovieInfo2TableViewCell: UITableViewCell {
         
     }
     
-    func configureUI() {
+    override func configureUI() {
         overViewLabel.numberOfLines = 2
         plusButton.tintColor = .black
         plusButton.setImage(UIImage(systemName: "chevron.down"), for: .normal)

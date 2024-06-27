@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 import Kingfisher
 
-class MovieInfoViewController: UIViewController {
+class MovieInfoViewController: BaseViewController {
 
     let movieBackground = UIImageView()
     let movieTitle = UILabel()
@@ -29,14 +29,9 @@ class MovieInfoViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        configureHierarchy()
-        configureLayout()
-        configureUI()
-        
         movieInfoTableView.delegate = self
         movieInfoTableView.dataSource = self
         movieInfoTableView.register(MovieInfoTableViewCell.self, forCellReuseIdentifier: MovieInfoTableViewCell.identifier)
@@ -44,7 +39,7 @@ class MovieInfoViewController: UIViewController {
 
     }
     
-    func configureHierarchy() {
+    override func configureHierarchy() {
         
         view.addSubview(movieBackground)
         movieBackground.addSubview(movieTitle)
@@ -53,7 +48,7 @@ class MovieInfoViewController: UIViewController {
         
     }
     
-    func configureLayout() {
+    override func configureLayout() {
         
         movieBackground.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide)
@@ -85,7 +80,7 @@ class MovieInfoViewController: UIViewController {
         
     }
     
-    func configureUI() {
+    override func configureUI() {
         view.backgroundColor = .white
         navigationItem.title = "출연/제작"
         let item = UIBarButtonItem(image: UIImage(systemName: "chevron.left"), style: .plain, target: self, action: #selector(backButtonClicked))

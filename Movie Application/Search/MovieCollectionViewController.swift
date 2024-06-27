@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 import Alamofire
 
-class MovieCollectionViewController: UIViewController {
+class MovieCollectionViewController: BaseViewController {
 
     lazy var movieCollectionView = UICollectionView(frame: .zero, collectionViewLayout: collectionViewLayout())
     
@@ -43,20 +43,16 @@ class MovieCollectionViewController: UIViewController {
         movieCollectionView.register(MovieCollectionViewCell.self, forCellWithReuseIdentifier: MovieCollectionViewCell.identifier)
         
         searchBar.delegate = self
-        
-        configureHierarchy()
-        configureLayout()
-        configureUI()
-        
+
     }
     
-    func configureHierarchy() {
+    override func configureHierarchy() {
         
         view.addSubview(searchBar)
         view.addSubview(movieCollectionView)
     }
     
-    func configureLayout() {
+    override func configureLayout() {
         
         searchBar.snp.makeConstraints { make in
             make.top.leading.trailing.equalTo(view.safeAreaLayoutGuide)
@@ -71,7 +67,7 @@ class MovieCollectionViewController: UIViewController {
         
     }
     
-    func configureUI() {
+    override func configureUI() {
         view.backgroundColor = .white
         searchBar.placeholder = "영화 제목을 검색해보세요."
         
@@ -93,6 +89,7 @@ class MovieCollectionViewController: UIViewController {
             case .success(let value):
                 dump(value)
                 
+                self.list.total_pages = value.total_pages
                 var filterList: [MoviePoster] = []
                 
                 if self.page == 1 {
@@ -115,24 +112,24 @@ class MovieCollectionViewController: UIViewController {
                     
                     self.list.results.append(contentsOf: filterList)
                 }
-                
+                                
                 self.movieCollectionView.reloadData()
                 
                 if self.page == 1 {
-                    self.movieCollectionView.scrollToItem(at: IndexPath(row: 0,section: 0),at: .top,
-                        animated: false
-                    )
+                    self.movieCollectionView.scrollToItem(at: IndexPath(row: 0,section: 0),at: .top, animated: false)
                 }
-                
+
             case .failure(let error):
-                print("실패")
+                print(error)
+                
             }
         }
         
     }
     
-    
 }
+
+
 
 extension MovieCollectionViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     
@@ -144,7 +141,7 @@ extension MovieCollectionViewController: UICollectionViewDelegate, UICollectionV
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MovieCollectionViewCell.identifier, for: indexPath) as! MovieCollectionViewCell
         
-        let data = list.results[indexPath.row]
+        let data = list.results[indexPath.item]
         
         if data != nil {
             cell.designCell(transition: data)
@@ -160,7 +157,7 @@ extension MovieCollectionViewController: UICollectionViewDataSourcePrefetching {
     func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
         
         for item in indexPaths {
-            if list.results.count - 2 == item.row {
+            if list.results.count - 4 == item.item {
                 page += 1
                 if list.total_pages != page {
                     callRequest(text: searchBar.text!)
@@ -178,10 +175,7 @@ extension MovieCollectionViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         page = 1
         callRequest(text: searchBar.text!)
-
     }
     
 }
-
-
 

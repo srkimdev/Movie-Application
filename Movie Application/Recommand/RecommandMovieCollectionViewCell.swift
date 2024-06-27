@@ -9,28 +9,20 @@ import UIKit
 import Kingfisher
 import SnapKit
 
-class RecommandMovieCollectionViewCell: UICollectionViewCell {
+class RecommandMovieCollectionViewCell: BaseCollectionViewCell {
     
     let movieImage = UIImageView()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
-        configureHierarchy()
-        configureLayout()
-        configureUI()
+
     }
     
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    func configureHierarchy() {
+    override func configureHierarchy() {
         contentView.addSubview(movieImage)
     }
     
-    func configureLayout() {
+    override func configureLayout() {
         
         movieImage.snp.makeConstraints { make in
             make.edges.equalTo(contentView.safeAreaLayoutGuide)
@@ -38,7 +30,7 @@ class RecommandMovieCollectionViewCell: UICollectionViewCell {
         
     }
     
-    func configureUI() {
+    override func configureUI() {
         movieImage.backgroundColor = .black
         movieImage.layer.cornerRadius = 5
         movieImage.layer.masksToBounds = true

@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class SettingViewController: UIViewController {
+class SettingViewController: BaseViewController {
 
     let titleLabel = UILabel()
     let emailUI = UILabel()
@@ -23,14 +23,10 @@ class SettingViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        configureHierarchy()
-        configureLayout()
-        configureUI()
-        
+
     }
 
-    func configureLayout() {
+    override func configureLayout() {
         titleLabel.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide).offset(35)
             make.leading.equalTo(view.safeAreaLayoutGuide).offset(100)
@@ -94,7 +90,7 @@ class SettingViewController: UIViewController {
         
     }
     
-    func configureHierarchy() {
+    override func configureHierarchy() {
         view.addSubview(titleLabel)
         view.addSubview(emailUI)
         view.addSubview(passwordUI)
@@ -106,7 +102,7 @@ class SettingViewController: UIViewController {
         view.addSubview(switchButton)
     }
     
-    func configureUI() {
+    override func configureUI() {
         view.backgroundColor = .black
         
         titleLabel.text = "NETFLIX"

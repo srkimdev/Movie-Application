@@ -9,31 +9,22 @@ import UIKit
 import SnapKit
 import Kingfisher
 
-class MovieCollectionViewCell: UICollectionViewCell {
-    
-//    static let identifier = "MovieCollectionViewCell"
+class MovieCollectionViewCell: BaseCollectionViewCell {
     
     let movieImage = UIImageView()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
-        configureHierarchy()
-        configureLayout()
-        configureUI()
-    }
 
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
     
-    func configureHierarchy() {
+    override func configureHierarchy() {
         
         contentView.addSubview(movieImage)
         
     }
     
-    func configureLayout() {
+    override func configureLayout() {
         
         movieImage.snp.makeConstraints { make in
             make.edges.equalTo(contentView)
@@ -41,7 +32,7 @@ class MovieCollectionViewCell: UICollectionViewCell {
         
     }
     
-    func configureUI() {
+    override func configureUI() {
         
         movieImage.layer.masksToBounds = true
         movieImage.layer.cornerRadius = 5
@@ -50,7 +41,7 @@ class MovieCollectionViewCell: UICollectionViewCell {
     
     func designCell(transition: MoviePoster) {
         
-        let url = URL(string: "https://image.tmdb.org/t/p/w780" + (transition.poster_path ?? ""))
+        let url = URL(string: "https://image.tmdb.org/t/p/w780" + (transition.poster_path!))
         movieImage.kf.setImage(with: url)
         
     }

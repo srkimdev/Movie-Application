@@ -68,14 +68,14 @@ struct MovieInfo2: Decodable {
 
 struct MovieSearch: Decodable {
     
-    let total_pages: Int
+    var total_pages: Int
     var results: [MoviePoster]
     
 }
 
 struct MoviePoster: Decodable {
     
-    let poster_path: String
+    let poster_path: String?
     
 }
 
