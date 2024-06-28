@@ -50,7 +50,6 @@ class MainScreenViewController: BaseViewController {
             make.leading.equalTo(view.safeAreaLayoutGuide).offset(16)
             make.trailing.equalTo(view.safeAreaLayoutGuide).offset(-16)
             make.height.equalTo(480)
-            
         }
         
         nowHotLabel.snp.makeConstraints { make in

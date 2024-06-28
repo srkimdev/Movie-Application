@@ -47,7 +47,6 @@ class MovieCollectionViewController: BaseViewController {
     }
     
     override func configureHierarchy() {
-        
         view.addSubview(searchBar)
         view.addSubview(movieCollectionView)
     }
@@ -70,66 +69,9 @@ class MovieCollectionViewController: BaseViewController {
     override func configureUI() {
         view.backgroundColor = .white
         searchBar.placeholder = "영화 제목을 검색해보세요."
-        
-    }
-    
-    func callRequest(text: String) {
-        
-        let url = "https://api.themoviedb.org/3/search/movie?query=\(text)&page=\(page)"
-        
-        let header: HTTPHeaders = [
-            "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJmMWZlZDlhZDI4M2YwNmQ2OGM5MmQ0OGU5YjY5MzM1NSIsInN1YiI6IjY2NjU5YWJmYTJiNTYwOGZiOTEzODA3MiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.DsjHLjeT2yEYwT6Jy_u8IZip2TJuqLKbigAjKaiz0jo",
-            "accept": "application/json"
-        ]
-        
-        AF.request(url, method: .get, headers: header).responseDecodable(of: MovieSearch.self) { response in
-            
-            switch response.result {
-                
-            case .success(let value):
-                dump(value)
-                
-                self.list.total_pages = value.total_pages
-                var filterList: [MoviePoster] = []
-                
-                if self.page == 1 {
-                    
-                    for i in value.results {
-                        if i.poster_path != nil {
-                            filterList.append(i)
-                        }
-                    }
-                    
-                    self.list.results = filterList
-                    
-                } else {
-                    
-                    for i in value.results {
-                        if i.poster_path != nil {
-                            filterList.append(i)
-                        }
-                    }
-                    
-                    self.list.results.append(contentsOf: filterList)
-                }
-                                
-                self.movieCollectionView.reloadData()
-                
-                if self.page == 1 {
-                    self.movieCollectionView.scrollToItem(at: IndexPath(row: 0,section: 0),at: .top, animated: false)
-                }
-
-            case .failure(let error):
-                print(error)
-                
-            }
-        }
-        
     }
     
 }
-
-
 
 extension MovieCollectionViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     
@@ -143,9 +85,7 @@ extension MovieCollectionViewController: UICollectionViewDelegate, UICollectionV
         
         let data = list.results[indexPath.item]
         
-        if data != nil {
-            cell.designCell(transition: data)
-        }
+        cell.designCell(transition: data)
         
         return cell
     }
@@ -163,9 +103,7 @@ extension MovieCollectionViewController: UICollectionViewDataSourcePrefetching {
                     callRequest(text: searchBar.text!)
                 }
             }
-            
         }
-        
     }
     
 }
@@ -175,6 +113,49 @@ extension MovieCollectionViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         page = 1
         callRequest(text: searchBar.text!)
+    }
+    
+}
+
+extension MovieCollectionViewController {
+    
+    func callRequest(text: String) {
+        
+        TMDBAPI.shared.communication(api: APIRequest.search(query: text, page: page), model: MovieSearch.self) { value, error in
+            
+            guard let value = value else { return }
+            
+            self.list.total_pages = value.total_pages
+            var filterList: [MoviePoster] = []
+            
+            if self.page == 1 {
+                
+                for i in value.results {
+                    if i.poster_path != nil {
+                        filterList.append(i)
+                    }
+                }
+                
+                self.list.results = filterList
+                
+            } else {
+                
+                for i in value.results {
+                    if i.poster_path != nil {
+                        filterList.append(i)
+                    }
+                }
+                
+                self.list.results.append(contentsOf: filterList)
+            }
+                            
+            self.movieCollectionView.reloadData()
+            
+            if self.page == 1 {
+                self.movieCollectionView.scrollToItem(at: IndexPath(row: 0,section: 0),at: .top, animated: false)
+            }
+        }
+
     }
     
 }

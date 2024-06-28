@@ -19,31 +19,23 @@ class MovieCollectionViewCell: BaseCollectionViewCell {
     }
     
     override func configureHierarchy() {
-        
         contentView.addSubview(movieImage)
-        
     }
     
     override func configureLayout() {
-        
         movieImage.snp.makeConstraints { make in
             make.edges.equalTo(contentView)
         }
-        
     }
     
     override func configureUI() {
-        
         movieImage.layer.masksToBounds = true
         movieImage.layer.cornerRadius = 5
-        
     }
     
     func designCell(transition: MoviePoster) {
-        
         let url = URL(string: "https://image.tmdb.org/t/p/w780" + (transition.poster_path!))
         movieImage.kf.setImage(with: url)
-        
     }
     
 }

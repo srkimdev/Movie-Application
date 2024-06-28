@@ -14,26 +14,26 @@ class TabBarViewController: UITabBarController {
         
         UITabBar.appearance().backgroundColor = .white
         
-        let mainscreen = MainScreenViewController()
+        let home = MainScreenViewController()
         let setting = SettingViewController()
-        let movie = MovieListViewController()
-        let recommand = RecommandMovieViewController()
+        let movieList = MovieListViewController()
+        let recommend = RecommandMovieViewController()
         
-        mainscreen.title = "홈"
+        home.title = "홈"
         setting.title = "NEW & HOT"
-        movie.title = "저장한 콘텐츠 목록"
-        recommand.title = "연관된 영화"
+        movieList.title = "저장한 콘텐츠 목록"
+        recommend.title = "연관된 영화"
         
-        mainscreen.tabBarItem.image = UIImage.init(systemName: "house")
+        home.tabBarItem.image = UIImage.init(systemName: "house")
         setting.tabBarItem.image = UIImage.init(systemName: "magnifyingglass")
-        movie.tabBarItem.image = UIImage.init(systemName: "book")
-        recommand.tabBarItem.image = UIImage(systemName: "chevron.right")
+        movieList.tabBarItem.image = UIImage.init(systemName: "book")
+        recommend.tabBarItem.image = UIImage(systemName: "chevron.right")
         
-        let navigationHome = UINavigationController(rootViewController: mainscreen)
+        let navigationHome = UINavigationController(rootViewController: home)
         let navigationSetting = UINavigationController(rootViewController: setting)
-        let navigationMovie = UINavigationController(rootViewController: movie)
-        let navigationRecommand = UINavigationController(rootViewController: recommand)
+        let navigationMovie = UINavigationController(rootViewController: movieList)
+        let navigationRecommend = UINavigationController(rootViewController: recommend)
         
-        setViewControllers([navigationHome, navigationSetting, navigationMovie, navigationRecommand], animated: false)
+        setViewControllers([navigationHome, navigationSetting, navigationMovie, navigationRecommend], animated: false)
     }
 }

@@ -30,47 +30,47 @@ class RecommandMovieViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let group = DispatchGroup()
-        
-        group.enter()
-        DispatchQueue.global().async(group: group) {
-            TMDBAPI.shared.communicationRe(api: APIRequest.similar(query: "710295")) { value in
-                var filterList: [RecommandKind] = []
-            
-                for i in value {
-                    filterList.append(i)
-                }
-                self.imageList[0] = filterList
-                
-                group.leave()
-                
-            } errorHandler: { value in
-                print(value)
-            }
-
-        }
-        
-        group.enter()
-        DispatchQueue.global().async(group: group) {
-            TMDBAPI.shared.communicationRe(api: APIRequest.recommand(query: "940721")) { value in
-                var filterList: [RecommandKind] = []
-                
-                for i in value {
-                    filterList.append(i)
-                }
-                self.imageList[1] = filterList
-                
-                group.leave()
-                
-            } errorHandler: { value in
-                print(value)
-            }
-
-        }
-        
-        group.notify(queue: .main) {
-            self.movieTableView.reloadData()
-        }
+//        let group = DispatchGroup()
+//        
+//        group.enter()
+//        DispatchQueue.global().async(group: group) {
+//            TMDBAPI.shared.communication(api: APIRequest.similar(query: "710295")) { value in
+//                var filterList: [RecommandKind] = []
+//            
+//                for i in value {
+//                    filterList.append(i)
+//                }
+//                self.imageList[0] = filterList
+//                
+//                group.leave()
+//                
+//            } errorHandler: { value in
+//                print(value)
+//            }
+//
+//        }
+//        
+//        group.enter()
+//        DispatchQueue.global().async(group: group) {
+//            TMDBAPI.shared.communicationRe(api: APIRequest.recommand(query: "940721")) { value in
+//                var filterList: [RecommandKind] = []
+//                
+//                for i in value {
+//                    filterList.append(i)
+//                }
+//                self.imageList[1] = filterList
+//                
+//                group.leave()
+//                
+//            } errorHandler: { value in
+//                print(value)
+//            }
+//
+//        }
+//        
+//        group.notify(queue: .main) {
+//            self.movieTableView.reloadData()
+//        }
         
     }
     

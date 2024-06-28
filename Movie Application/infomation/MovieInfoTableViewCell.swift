@@ -56,11 +56,9 @@ class MovieInfoTableViewCell: BaseTableViewCell {
         actorImage.backgroundColor = .red
         actorImage.layer.masksToBounds = true
         actorImage.layer.cornerRadius = 8
-        
-        actorName.text = "Lee Jung-jae"
+    
         actorName.font = .systemFont(ofSize: 16)
         
-        characterName.text = "Seong Gi-hun / No.456"
         characterName.font = .systemFont(ofSize: 13)
     }
     

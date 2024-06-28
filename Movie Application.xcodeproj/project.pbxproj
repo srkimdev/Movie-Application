@@ -31,6 +31,7 @@
 		DC93D0022C2D7266007D30BA /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC93D0012C2D7266007D30BA /* BaseViewController.swift */; };
 		DC93D0042C2D72BB007D30BA /* BaseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC93D0032C2D72BB007D30BA /* BaseTableViewCell.swift */; };
 		DC93D0062C2D7311007D30BA /* BaseCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC93D0052C2D7311007D30BA /* BaseCollectionViewCell.swift */; };
+		DC93D0082C2D76EF007D30BA /* TMDBRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC93D0072C2D76EF007D30BA /* TMDBRequest.swift */; };
 		DC9B933A2C2984FA0086AA21 /* RecommandMovieViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC9B93392C2984FA0086AA21 /* RecommandMovieViewController.swift */; };
 		DC9B933E2C298B020086AA21 /* RecommandMovieCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC9B933D2C298B020086AA21 /* RecommandMovieCollectionViewCell.swift */; };
 		DCACAF4C2C16D51400D0ECD1 /* ReusableProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCACAF4B2C16D51400D0ECD1 /* ReusableProtocol.swift */; };
@@ -61,6 +62,7 @@
 		DC93D0012C2D7266007D30BA /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		DC93D0032C2D72BB007D30BA /* BaseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTableViewCell.swift; sourceTree = "<group>"; };
 		DC93D0052C2D7311007D30BA /* BaseCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCollectionViewCell.swift; sourceTree = "<group>"; };
+		DC93D0072C2D76EF007D30BA /* TMDBRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TMDBRequest.swift; sourceTree = "<group>"; };
 		DC9B93392C2984FA0086AA21 /* RecommandMovieViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommandMovieViewController.swift; sourceTree = "<group>"; };
 		DC9B933D2C298B020086AA21 /* RecommandMovieCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommandMovieCollectionViewCell.swift; sourceTree = "<group>"; };
 		DCACAF4B2C16D51400D0ECD1 /* ReusableProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReusableProtocol.swift; sourceTree = "<group>"; };
@@ -100,7 +102,6 @@
 		DC33E1142C0EFBF700B8787A /* Movie Application */ = {
 			isa = PBXGroup;
 			children = (
-				DCACAF4F2C16D57200D0ECD1 /* stuff */,
 				DC33E1152C0EFBF700B8787A /* AppDelegate.swift */,
 				DC33E1172C0EFBF700B8787A /* SceneDelegate.swift */,
 				DC33E1192C0EFBF700B8787A /* ViewController.swift */,
@@ -108,6 +109,7 @@
 				DC33E11E2C0EFBF900B8787A /* Assets.xcassets */,
 				DC33E1202C0EFBF900B8787A /* LaunchScreen.storyboard */,
 				DC33E1232C0EFBF900B8787A /* Info.plist */,
+				DCACAF4F2C16D57200D0ECD1 /* stuff */,
 				DC93D0002C2D7251007D30BA /* Base */,
 				DC33E1322C0F37EB00B8787A /* TabBarViewController.swift */,
 				DC33E1302C0F0B5000B8787A /* MainScreenViewController.swift */,
@@ -174,6 +176,7 @@
 				DCACAF4B2C16D51400D0ECD1 /* ReusableProtocol.swift */,
 				DC762C292C16EED40050354F /* movieStruct.swift */,
 				DC67AD302C2BE73900A5129F /* TMDBAPI.swift */,
+				DC93D0072C2D76EF007D30BA /* TMDBRequest.swift */,
 			);
 			path = stuff;
 			sourceTree = "<group>";
@@ -262,6 +265,7 @@
 				DC33E1312C0F0B5000B8787A /* MainScreenViewController.swift in Sources */,
 				DC487CB12C197E4F006B7AAF /* MovieInfoViewController.swift in Sources */,
 				DC4008032C184D2C000E0F60 /* MovieCollectionViewController.swift in Sources */,
+				DC93D0082C2D76EF007D30BA /* TMDBRequest.swift in Sources */,
 				DC33E11A2C0EFBF700B8787A /* ViewController.swift in Sources */,
 				DC93D0042C2D72BB007D30BA /* BaseTableViewCell.swift in Sources */,
 				DC4008052C184DDD000E0F60 /* MovieCollectionViewCell.swift in Sources */,
