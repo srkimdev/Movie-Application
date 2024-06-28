@@ -23,7 +23,6 @@ class TMDBAPI {
             case .success(let value):
                 
                 completionHandler(value, nil)
-                print(value)
             
             case .failure(let error):
                 

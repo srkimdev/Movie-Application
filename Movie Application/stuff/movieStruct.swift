@@ -76,18 +76,27 @@ struct MovieSearch: Decodable {
 struct MoviePoster: Decodable {
     
     let poster_path: String?
+    let id: Int
+    let title: String
     
 }
 
 struct RecommandMovie: Decodable {
     
-    let results: [RecommandKind]?
+    let results: [RecommandKind]
     
 }
 
 struct RecommandKind: Decodable {
     
     let poster_path: String?
+    
+}
+
+struct titleID {
+    
+    let title: String
+    let id: Int
     
 }
 

@@ -15,13 +15,13 @@ enum APIRequest {
     
     case search(query: String, page: Int)
     
-    case recommand(query: String)
-    case similar(query: String)
+    case recommand(query: Int)
+    case similar(query: Int)
     
     var baseURL: String {
         return "https://api.themoviedb.org/3/"
     }
-    
+
     var endpoint: URL {
         switch self {
         

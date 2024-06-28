@@ -13,6 +13,7 @@ class RecommandMovieViewController: BaseViewController {
 
     let movieTitle = UILabel()
     let category = ["추천 영화", "비슷한 영화"]
+    var data: titleID?
 
     lazy var movieTableView = {
         let view = UITableView()
@@ -29,48 +30,50 @@ class RecommandMovieViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        guard let data = data else { return }
 
-//        let group = DispatchGroup()
-//        
-//        group.enter()
-//        DispatchQueue.global().async(group: group) {
-//            TMDBAPI.shared.communication(api: APIRequest.similar(query: "710295")) { value in
-//                var filterList: [RecommandKind] = []
-//            
-//                for i in value {
-//                    filterList.append(i)
-//                }
-//                self.imageList[0] = filterList
-//                
-//                group.leave()
-//                
-//            } errorHandler: { value in
-//                print(value)
-//            }
-//
-//        }
-//        
-//        group.enter()
-//        DispatchQueue.global().async(group: group) {
-//            TMDBAPI.shared.communicationRe(api: APIRequest.recommand(query: "940721")) { value in
-//                var filterList: [RecommandKind] = []
-//                
-//                for i in value {
-//                    filterList.append(i)
-//                }
-//                self.imageList[1] = filterList
-//                
-//                group.leave()
-//                
-//            } errorHandler: { value in
-//                print(value)
-//            }
-//
-//        }
-//        
-//        group.notify(queue: .main) {
-//            self.movieTableView.reloadData()
-//        }
+        let group = DispatchGroup()
+        
+        group.enter()
+        DispatchQueue.global().async(group: group) {
+            TMDBAPI.shared.communication(api: APIRequest.recommand(query: data.id), model: RecommandMovie.self) { value, error in
+                
+                guard let value = value else { return }
+                
+                var filterList: [RecommandKind] = []
+            
+                for i in value.results {
+                    filterList.append(i)
+                }
+                self.imageList[0] = filterList
+            
+                group.leave()
+            }
+            
+        }
+        
+        group.enter()
+        DispatchQueue.global().async(group: group) {
+            TMDBAPI.shared.communication(api: APIRequest.similar(query: data.id), model: RecommandMovie.self) { value, error in
+                
+                guard let value = value else { return }
+                
+                var filterList: [RecommandKind] = []
+                
+                for i in value.results {
+                    filterList.append(i)
+                }
+                self.imageList[1] = filterList
+                
+                group.leave()
+            }
+            
+        }
+        
+        group.notify(queue: .main) {
+            self.movieTableView.reloadData()
+        }
         
     }
     
@@ -100,7 +103,7 @@ class RecommandMovieViewController: BaseViewController {
         
         view.backgroundColor = .black
         
-        movieTitle.text = "극한직업"
+        movieTitle.text = data?.title
         movieTitle.textColor = .white
         movieTitle.font = .systemFont(ofSize: 25, weight: .bold)
         

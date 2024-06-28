@@ -90,6 +90,14 @@ extension MovieCollectionViewController: UICollectionViewDelegate, UICollectionV
         return cell
     }
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        let vc = RecommandMovieViewController()
+        let data = titleID(title: list.results[indexPath.item].title, id: list.results[indexPath.item].id)
+        vc.data = data
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    
 }
 
 extension MovieCollectionViewController: UICollectionViewDataSourcePrefetching {
@@ -123,7 +131,11 @@ extension MovieCollectionViewController {
         
         TMDBAPI.shared.communication(api: APIRequest.search(query: text, page: page), model: MovieSearch.self) { value, error in
             
-            guard let value = value else { return }
+            guard let value = value else {
+                self.list.results = []
+                self.movieCollectionView.reloadData()
+                return
+            }
             
             self.list.total_pages = value.total_pages
             var filterList: [MoviePoster] = []
@@ -151,7 +163,7 @@ extension MovieCollectionViewController {
                             
             self.movieCollectionView.reloadData()
             
-            if self.page == 1 {
+            if self.page == 1 && !self.list.results.isEmpty {
                 self.movieCollectionView.scrollToItem(at: IndexPath(row: 0,section: 0),at: .top, animated: false)
             }
         }
