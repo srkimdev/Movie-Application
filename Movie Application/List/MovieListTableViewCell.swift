@@ -196,7 +196,7 @@ class MovieListTableViewCell: BaseTableViewCell {
         
     }
     
-    func designCell(transition: MovieInfo) {
+    func designCell(transition: weekMovieInfo) {
         
         movieTitleLabel.text = transition.title
         dateLabel.text = transition.release_date
@@ -215,9 +215,7 @@ class MovieListTableViewCell: BaseTableViewCell {
     }
     
     func designCell(transition: [String]) {
-        
         let joinedString = transition.joined(separator: ", ")
         characterLabel.text = joinedString
-        
     }
 }

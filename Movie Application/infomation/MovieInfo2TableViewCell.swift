@@ -47,7 +47,7 @@ class MovieInfo2TableViewCell: BaseTableViewCell {
         plusButton.setImage(UIImage(systemName: "chevron.down"), for: .normal)
     }
     
-    func designCell(transition: MovieInfo) {
+    func designCell(transition: weekMovieInfo) {
         
         overViewLabel.text = transition.overview
         overViewLabel.font = .systemFont(ofSize: 14)

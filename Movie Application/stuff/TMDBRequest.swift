@@ -10,7 +10,11 @@ import Alamofire
 
 enum APIRequest {
     
+    case firstInfo
+    case secondInfo(id: Int)
+    
     case search(query: String, page: Int)
+    
     case recommand(query: String)
     case similar(query: String)
     
@@ -20,6 +24,12 @@ enum APIRequest {
     
     var endpoint: URL {
         switch self {
+        
+        case .firstInfo:
+            return URL(string: baseURL + "trending/movie/week?")!
+            
+        case .secondInfo(let id):
+            return URL(string: baseURL + "movie/\(id)/credits?api_key=\(APIkey.id)")!
             
         case .search(let movieName, let page):
             return URL(string: baseURL + "search/movie?query=\(movieName)&page=\(page)")!

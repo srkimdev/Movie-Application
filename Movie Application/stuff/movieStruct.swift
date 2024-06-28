@@ -7,13 +7,13 @@
 
 import UIKit
 
-struct MovieTotal: Decodable {
+struct weekMovie: Decodable {
     
-    let results: [MovieInfo]
+    let results: [weekMovieInfo]
     
 }
 
-struct MovieInfo: Decodable {
+struct weekMovieInfo: Decodable {
     
     let backdrop_path: String
     let id: Int
@@ -52,13 +52,13 @@ struct Genre {
     
 }
 
-struct MovieTotal2: Decodable {
+struct detailMovie: Decodable {
     
-    let cast: [MovieInfo2]
+    let cast: [detailMovieInfo]
     
 }
 
-struct MovieInfo2: Decodable {
+struct detailMovieInfo: Decodable {
     
     let name: String
     let profile_path: String?

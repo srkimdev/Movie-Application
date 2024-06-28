@@ -16,10 +16,10 @@ class MovieInfoViewController: BaseViewController {
     let moviePoster = UIImageView()
     let movieInfoTableView = UITableView()
     
-    var list: MovieInfo
-    var list2: [MovieInfo2]
+    var list: weekMovieInfo
+    var list2: [detailMovieInfo]
     
-    init(list: MovieInfo, list2: [MovieInfo2]) {
+    init(list: weekMovieInfo, list2: [detailMovieInfo]) {
         self.list = list
         self.list2 = list2
         super.init(nibName: nil, bundle: nil)
@@ -61,7 +61,6 @@ class MovieInfoViewController: BaseViewController {
             make.leading.equalTo(movieBackground.snp.leading).offset(20)
             make.trailing.equalTo(movieBackground.snp.trailing)
             make.height.equalTo(30)
-            
         }
         
         moviePoster.snp.makeConstraints { make in
@@ -77,10 +76,10 @@ class MovieInfoViewController: BaseViewController {
             make.bottom.equalTo(view.safeAreaLayoutGuide)
         }
         
-        
     }
     
     override func configureUI() {
+        
         view.backgroundColor = .white
         navigationItem.title = "출연/제작"
         let item = UIBarButtonItem(image: UIImage(systemName: "chevron.left"), style: .plain, target: self, action: #selector(backButtonClicked))
@@ -104,8 +103,8 @@ class MovieInfoViewController: BaseViewController {
         
         if let cell = sender.superview?.superview as? MovieInfo2TableViewCell {
             cell.toggle = !cell.toggle
-            print(cell.toggle)
             cell.overViewLabel.numberOfLines = cell.toggle ? 2 : 0
+            
             let imageName = cell.toggle ? "chevron.down" : "chevron.up"
             cell.plusButton.setImage(UIImage(systemName: imageName), for: .normal)
             movieInfoTableView.reloadData()
@@ -113,9 +112,7 @@ class MovieInfoViewController: BaseViewController {
     }
     
     @objc func backButtonClicked() {
-        
         navigationController?.popViewController(animated: true)
-        
     }
 
 }
@@ -127,26 +124,23 @@ extension MovieInfoViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
         if section == 0 {
             return 1
         } else {
-            return 10
+            return list2.count
         }
-        
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-            if section == 0 {
-                return "OverView"
-            } else {
-                return "Cast"
-            }
+        if section == 0 {
+            return "OverView"
+        } else {
+            return "Cast"
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-    
         if indexPath.section == 0 {
             
             let cell = movieInfoTableView.dequeueReusableCell(withIdentifier: MovieInfo2TableViewCell.identifier, for: indexPath) as! MovieInfo2TableViewCell
@@ -175,6 +169,5 @@ extension MovieInfoViewController: UITableViewDelegate, UITableViewDataSource {
             return 80
         }
     }
-    
     
 }

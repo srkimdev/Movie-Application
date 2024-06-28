@@ -62,10 +62,10 @@ class MovieInfoTableViewCell: BaseTableViewCell {
         characterName.font = .systemFont(ofSize: 13)
     }
     
-    func designCell(transition: MovieInfo2) {
+    func designCell(transition: detailMovieInfo) {
         
         actorName.text = transition.name
-        let url = URL(string: "https://image.tmdb.org/t/p/w780" + transition.profile_path!)
+        let url = URL(string: "https://image.tmdb.org/t/p/w780" + (transition.profile_path ?? ""))
         actorImage.kf.setImage(with: url)
         characterName.text = transition.character
         
