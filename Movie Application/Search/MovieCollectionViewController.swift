@@ -10,10 +10,8 @@ import SnapKit
 import Alamofire
 
 class MovieCollectionViewController: BaseViewController {
-
-    lazy var movieCollectionView = UICollectionView(frame: .zero, collectionViewLayout: collectionViewLayout())
     
-    let searchBar = UISearchBar()
+    let mainView = MovieCollectionView()
     
     var list = MovieSearch(
         total_pages: 0,
@@ -22,53 +20,19 @@ class MovieCollectionViewController: BaseViewController {
     
     var page = 1
     
-    func collectionViewLayout() -> UICollectionViewLayout {
-        let layout = UICollectionViewFlowLayout()
-        let width = UIScreen.main.bounds.width - 40
-        layout.itemSize = CGSize(width: width/3, height: 150)
-        layout.scrollDirection = .vertical
-        layout.minimumInteritemSpacing = 10
-        layout.minimumLineSpacing = 10
-        layout.sectionInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
-        
-        return layout
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        movieCollectionView.delegate = self
-        movieCollectionView.dataSource = self
-        movieCollectionView.prefetchDataSource = self
-        movieCollectionView.register(MovieCollectionViewCell.self, forCellWithReuseIdentifier: MovieCollectionViewCell.identifier)
+        mainView.movieCollectionView.delegate = self
+        mainView.movieCollectionView.dataSource = self
+        mainView.movieCollectionView.prefetchDataSource = self
         
-        searchBar.delegate = self
+        mainView.searchBar.delegate = self
 
     }
     
-    override func configureHierarchy() {
-        view.addSubview(searchBar)
-        view.addSubview(movieCollectionView)
-    }
-    
-    override func configureLayout() {
-        
-        searchBar.snp.makeConstraints { make in
-            make.top.leading.trailing.equalTo(view.safeAreaLayoutGuide)
-            make.height.equalTo(44)
-        }
-        
-        movieCollectionView.snp.makeConstraints { make in
-            make.top.equalTo(searchBar.snp.bottom).offset(4)
-            make.horizontalEdges.equalTo(view.safeAreaLayoutGuide)
-            make.bottom.equalTo(view.safeAreaLayoutGuide)
-        }
-        
-    }
-    
-    override func configureUI() {
-        view.backgroundColor = .white
-        searchBar.placeholder = "영화 제목을 검색해보세요."
+    override func loadView() {
+        view = mainView
     }
     
 }
@@ -108,7 +72,7 @@ extension MovieCollectionViewController: UICollectionViewDataSourcePrefetching {
             if list.results.count - 4 == item.item {
                 page += 1
                 if list.total_pages != page {
-                    callRequest(text: searchBar.text!)
+                    callRequest(text: mainView.searchBar.text!)
                 }
             }
         }
@@ -133,7 +97,7 @@ extension MovieCollectionViewController {
             
             guard let value = value else {
                 self.list.results = []
-                self.movieCollectionView.reloadData()
+                self.mainView.movieCollectionView.reloadData()
                 return
             }
             
@@ -161,10 +125,10 @@ extension MovieCollectionViewController {
                 self.list.results.append(contentsOf: filterList)
             }
                             
-            self.movieCollectionView.reloadData()
+            self.mainView.movieCollectionView.reloadData()
             
             if self.page == 1 && !self.list.results.isEmpty {
-                self.movieCollectionView.scrollToItem(at: IndexPath(row: 0,section: 0),at: .top, animated: false)
+                self.mainView.movieCollectionView.scrollToItem(at: IndexPath(row: 0,section: 0),at: .top, animated: false)
             }
         }
 

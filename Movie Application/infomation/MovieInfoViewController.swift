@@ -11,13 +11,10 @@ import Kingfisher
 
 class MovieInfoViewController: BaseViewController {
 
-    let movieBackground = UIImageView()
-    let movieTitle = UILabel()
-    let moviePoster = UIImageView()
-    let movieInfoTableView = UITableView()
-    
     var list: weekMovieInfo
     var list2: [detailMovieInfo]
+    
+    let mainView = MovieInfoView()
     
     init(list: weekMovieInfo, list2: [detailMovieInfo]) {
         self.list = list
@@ -29,74 +26,32 @@ class MovieInfoViewController: BaseViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func loadView() {
+        view = mainView
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        movieInfoTableView.delegate = self
-        movieInfoTableView.dataSource = self
-        movieInfoTableView.register(MovieInfoTableViewCell.self, forCellReuseIdentifier: MovieInfoTableViewCell.identifier)
-        movieInfoTableView.register(MovieInfo2TableViewCell.self, forCellReuseIdentifier: MovieInfo2TableViewCell.identifier)
+        mainView.movieInfoTableView.delegate = self
+        mainView.movieInfoTableView.dataSource = self
 
     }
     
-    override func configureHierarchy() {
-        
-        view.addSubview(movieBackground)
-        movieBackground.addSubview(movieTitle)
-        movieBackground.addSubview(moviePoster)
-        view.addSubview(movieInfoTableView)
-        
-    }
-    
-    override func configureLayout() {
-        
-        movieBackground.snp.makeConstraints { make in
-            make.top.equalTo(view.safeAreaLayoutGuide)
-            make.horizontalEdges.equalTo(view.safeAreaLayoutGuide)
-            make.height.equalTo(180)
-        }
-        
-        movieTitle.snp.makeConstraints { make in
-            make.top.equalTo(movieBackground.snp.top).offset(20)
-            make.leading.equalTo(movieBackground.snp.leading).offset(20)
-            make.trailing.equalTo(movieBackground.snp.trailing)
-            make.height.equalTo(30)
-        }
-        
-        moviePoster.snp.makeConstraints { make in
-            make.top.equalTo(movieTitle.snp.bottom).offset(8)
-            make.leading.equalTo(movieBackground.snp.leading).offset(24)
-            make.width.equalTo(90)
-            make.bottom.equalTo(movieBackground.snp.bottom).offset(-8)
-        }
-        
-        movieInfoTableView.snp.makeConstraints { make in
-            make.top.equalTo(movieBackground.snp.bottom)
-            make.horizontalEdges.equalTo(view.safeAreaLayoutGuide)
-            make.bottom.equalTo(view.safeAreaLayoutGuide)
-        }
-        
-    }
-    
     override func configureUI() {
-        
-        view.backgroundColor = .white
         navigationItem.title = "출연/제작"
+        
         let item = UIBarButtonItem(image: UIImage(systemName: "chevron.left"), style: .plain, target: self, action: #selector(backButtonClicked))
         item.tintColor = UIColor.black
         navigationItem.leftBarButtonItem = item
         
-        movieBackground.backgroundColor = .lightGray
         var url = URL(string: "https://image.tmdb.org/t/p/w780" + list.backdrop_path)
-        movieBackground.kf.setImage(with: url)
-        
-        movieTitle.text = list.title
-        movieTitle.textColor = .white
-        movieTitle.font = .boldSystemFont(ofSize: 24)
+        mainView.movieBackground.kf.setImage(with: url)
         
         url = URL(string: "https://image.tmdb.org/t/p/w780" + list.poster_path)
-        moviePoster.kf.setImage(with: url)
+        mainView.moviePoster.kf.setImage(with: url)
         
+        mainView.movieTitle.text = list.title
     }
     
     @objc func plusButtonClicked(sender: UIButton) {
@@ -107,7 +62,7 @@ class MovieInfoViewController: BaseViewController {
             
             let imageName = cell.toggle ? "chevron.down" : "chevron.up"
             cell.plusButton.setImage(UIImage(systemName: imageName), for: .normal)
-            movieInfoTableView.reloadData()
+            mainView.movieInfoTableView.reloadData()
         }
     }
     
@@ -143,7 +98,7 @@ extension MovieInfoViewController: UITableViewDelegate, UITableViewDataSource {
         
         if indexPath.section == 0 {
             
-            let cell = movieInfoTableView.dequeueReusableCell(withIdentifier: MovieInfo2TableViewCell.identifier, for: indexPath) as! MovieInfo2TableViewCell
+            let cell = mainView.movieInfoTableView.dequeueReusableCell(withIdentifier: MovieInfo2TableViewCell.identifier, for: indexPath) as! MovieInfo2TableViewCell
             
             cell.designCell(transition: list)
             cell.plusButton.addTarget(self, action: #selector(plusButtonClicked), for: .touchUpInside)
@@ -153,7 +108,7 @@ extension MovieInfoViewController: UITableViewDelegate, UITableViewDataSource {
             
         } else {
             
-            let cell = movieInfoTableView.dequeueReusableCell(withIdentifier: MovieInfoTableViewCell.identifier, for: indexPath) as! MovieInfoTableViewCell
+            let cell = mainView.movieInfoTableView.dequeueReusableCell(withIdentifier: MovieInfoTableViewCell.identifier, for: indexPath) as! MovieInfoTableViewCell
             
             cell.designCell(transition: list2[indexPath.row])
             

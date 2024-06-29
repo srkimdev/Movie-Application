@@ -10,55 +10,36 @@ import SnapKit
 import Alamofire
 
 class MovieListViewController: BaseViewController {
-
-    let movieTableView = UITableView()
     
     var weekMovieInfoList: [weekMovieInfo] = []
     var detailMovieList: [[detailMovieInfo]] = []
     
     var characters: [[String]] = [] {
         didSet {
-            movieTableView.reloadData()
+            mainView.movieTableView.reloadData()
         }
+    }
+    
+    let mainView = MovieListView()
+    
+    override func loadView() {
+        view = mainView
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        movieTableView.delegate = self
-        movieTableView.dataSource = self
-        movieTableView.register(MovieListTableViewCell.self, forCellReuseIdentifier: MovieListTableViewCell.identifier)
-        
-        callRequest1()
-        
-    }
-    
-    override func configureHierarchy() {
-        view.addSubview(movieTableView)
-    }
-
-    override func configureLayout() {
-        
-        movieTableView.snp.makeConstraints { make in
-            make.top.equalTo(view.safeAreaLayoutGuide)
-            make.leading.equalTo(view.safeAreaLayoutGuide).offset(8)
-            make.trailing.equalTo(view.safeAreaLayoutGuide).offset(-8)
-            make.bottom.equalTo(view.safeAreaLayoutGuide)
-        }
-        
-    }
-
-    override func configureUI() {
-        
-        view.backgroundColor = .white
-        movieTableView.rowHeight = 430
-        movieTableView.separatorStyle = .none
         
         let leftItem = UIBarButtonItem(image: UIImage(systemName: "book"), style: .plain, target: self, action: nil)
         navigationItem.leftBarButtonItem = leftItem
         
         let rightItem = UIBarButtonItem(image: UIImage(systemName: "magnifyingglass"), style: .plain, target: self, action: #selector(searchButtonClicked))
         navigationItem.rightBarButtonItem = rightItem
+        
+        mainView.movieTableView.delegate = self
+        mainView.movieTableView.dataSource = self
+        mainView.movieTableView.register(MovieListTableViewCell.self, forCellReuseIdentifier: MovieListTableViewCell.identifier)
+        
+        callRequest1()
         
     }
     
@@ -82,7 +63,7 @@ extension MovieListViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = movieTableView.dequeueReusableCell(withIdentifier: MovieListTableViewCell.identifier, for: indexPath) as! MovieListTableViewCell
+        let cell = mainView.movieTableView.dequeueReusableCell(withIdentifier: MovieListTableViewCell.identifier, for: indexPath) as! MovieListTableViewCell
         cell.separatorInset.left = 0.0
         
         let movie = weekMovieInfoList[indexPath.row]
@@ -129,7 +110,7 @@ extension MovieListViewController {
             }
            
             self.characters.append(movie)
-            self.movieTableView.reloadData()
+            self.mainView.movieTableView.reloadData()
         }
     }
 }
