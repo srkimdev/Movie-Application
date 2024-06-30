@@ -11,25 +11,23 @@ import Alamofire
 
 class RecommandMovieViewController: BaseViewController {
 
-    let movieTitle = UILabel()
     let category = ["추천 영화", "비슷한 영화"]
     var data: titleID?
-
-    lazy var movieTableView = {
-        let view = UITableView()
-        view.delegate = self
-        view.dataSource = self
-        view.register(RecommandMovieTableViewCell.self, forCellReuseIdentifier: RecommandMovieTableViewCell.identifier)
-        view.rowHeight = 190
-        view.backgroundColor = .black
-        return view
-    }()
     
     var imageList: [[RecommandKind]] = [[RecommandKind(poster_path: "")],
                                         [RecommandKind(poster_path: "")]]
     
+    let mainView = RecommendCollectionView()
+    
+    override func loadView() {
+        view = mainView
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        mainView.movieTableView.delegate = self
+        mainView.movieTableView.dataSource = self
         
         guard let data = data else { return }
 
@@ -72,45 +70,15 @@ class RecommandMovieViewController: BaseViewController {
         }
         
         group.notify(queue: .main) {
-            self.movieTableView.reloadData()
-        }
-        
-    }
-    
-    override func configureHierarchy() {
-        
-        view.addSubview(movieTitle)
-        view.addSubview(movieTableView)
-        
-    }
-    
-    override func configureLayout() {
-        
-        movieTitle.snp.makeConstraints { make in
-            make.top.equalTo(view.safeAreaLayoutGuide).offset(12)
-            make.horizontalEdges.equalTo(view.safeAreaLayoutGuide).offset(8)
-            make.height.equalTo(30)
-        }
-        
-        movieTableView.snp.makeConstraints { make in
-            make.top.equalTo(movieTitle.snp.bottom).offset(8)
-            make.horizontalEdges.bottom.equalTo(view.safeAreaLayoutGuide)
+            self.mainView.movieTableView.reloadData()
         }
         
     }
     
     override func configureUI() {
-        
-        view.backgroundColor = .black
-        
-        movieTitle.text = data?.title
-        movieTitle.textColor = .white
-        movieTitle.font = .systemFont(ofSize: 25, weight: .bold)
-        
-        movieTableView.backgroundColor = .black
-        
+        mainView.movieTitle.text = data?.title
     }
-
+    
 }
 
 extension RecommandMovieViewController: UITableViewDelegate, UITableViewDataSource {
@@ -123,7 +91,7 @@ extension RecommandMovieViewController: UITableViewDelegate, UITableViewDataSour
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = movieTableView.dequeueReusableCell(withIdentifier: RecommandMovieTableViewCell.identifier, for: indexPath) as! RecommandMovieTableViewCell
+        let cell = mainView.movieTableView.dequeueReusableCell(withIdentifier: RecommandMovieTableViewCell.identifier, for: indexPath) as! RecommandMovieTableViewCell
         
         cell.collectionView.dataSource = self
         cell.collectionView.delegate = self

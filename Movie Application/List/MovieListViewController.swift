@@ -37,7 +37,6 @@ class MovieListViewController: BaseViewController {
         
         mainView.movieTableView.delegate = self
         mainView.movieTableView.dataSource = self
-        mainView.movieTableView.register(MovieListTableViewCell.self, forCellReuseIdentifier: MovieListTableViewCell.identifier)
         
         callRequest1()
         

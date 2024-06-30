@@ -11,6 +11,13 @@ class MovieListView: BaseView {
     
     let movieTableView = UITableView()
     
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        
+        movieTableView.register(MovieListTableViewCell.self, forCellReuseIdentifier: MovieListTableViewCell.identifier)
+    }
+    
+    
     override func configureHierarchy() {
         addSubview(movieTableView)
     }
