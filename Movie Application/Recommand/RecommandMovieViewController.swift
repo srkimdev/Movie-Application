@@ -14,9 +14,9 @@ class RecommandMovieViewController: BaseViewController {
     let category = ["추천 영화", "비슷한 영화", "포스터"]
     var data: titleID?
     
-    var imageList: [[RecommandKind]] = [[RecommandKind(poster_path: "")],
-                                        [RecommandKind(poster_path: "")],
-                                        [posterID(file_path: "")]]
+    var imageList: [[RecommandKind]] = [[RecommandKind(id: 0, poster_path: "")],
+                                        [RecommandKind(id: 0, poster_path: "")]
+                                        /*[posterID(file_path: "")]*/]
     
     let mainView = RecommendCollectionView()
     
@@ -38,6 +38,7 @@ class RecommandMovieViewController: BaseViewController {
         DispatchQueue.global().async(group: group) {
             TMDBAPI.shared.communication(api: APIRequest.recommand(query: data.id), model: RecommandMovie.self) { value, error in
                 
+                print(value)
                 guard let value = value else { return }
     
                 self.imageList[0] = value.results
@@ -59,20 +60,20 @@ class RecommandMovieViewController: BaseViewController {
             
         }
         
-        group.enter()
-        DispatchQueue.global().async(group: group) {
-            TMDBAPI.shared.communication(api: APIRequest.poster(query: data.id), model: TotalPoster.self) { value, error in
-                
-                guard let value = value else {
-                    
-                    group.leave()
-                    return }
-                
-                self.imageList[2] = value.backdrops
-            
-                group.leave()
-            }
-        }
+//        group.enter()
+//        DispatchQueue.global().async(group: group) {
+//            TMDBAPI.shared.communication(api: APIRequest.poster(query: data.id), model: TotalPoster.self) { value, error in
+//                
+//                guard let value = value else {
+//                    
+//                    group.leave()
+//                    return }
+//                
+//                self.imageList[2] = value.backdrops
+//            
+//                group.leave()
+//            }
+//        }
         
         group.notify(queue: .main) {
             self.mainView.movieTableView.reloadData()
@@ -130,4 +131,21 @@ extension RecommandMovieViewController: UICollectionViewDelegate, UICollectionVi
         return cell
     }
 
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        let vc = WebViewController()
+        
+        
+        TMDBAPI.shared.communication(api: APIRequest.video(query: imageList[collectionView.tag][indexPath.item].id!), model: Video.self) { value, error in
+            
+            DispatchQueue.main.async {
+                guard let value = value else { return }
+                
+                vc.data = value.results[indexPath.item].key
+                
+                self.navigationController?.pushViewController(vc, animated: true)
+            }
+        }
+    }
+    
 }

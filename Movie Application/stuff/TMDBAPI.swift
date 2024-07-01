@@ -26,6 +26,7 @@ class TMDBAPI {
             
             case .failure(let error):
                 
+                print(error)
                 completionHandler(nil, "잠시 후 ")
 
             }
