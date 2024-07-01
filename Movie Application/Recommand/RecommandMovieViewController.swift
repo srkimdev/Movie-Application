@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 import Alamofire
 
-class RecommandMovieViewController: BaseViewController {
+final class RecommandMovieViewController: BaseViewController {
 
     let category = ["추천 영화", "비슷한 영화", "포스터"]
     var data: titleID?
@@ -38,7 +38,6 @@ class RecommandMovieViewController: BaseViewController {
         DispatchQueue.global().async(group: group) {
             TMDBAPI.shared.communication(api: APIRequest.recommand(query: data.id), model: RecommandMovie.self) { value, error in
                 
-                print(value)
                 guard let value = value else { return }
     
                 self.imageList[0] = value.results

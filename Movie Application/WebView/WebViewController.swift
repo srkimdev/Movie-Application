@@ -7,7 +7,7 @@
 
 import UIKit
 
-class WebViewController: BaseViewController {
+final class WebViewController: BaseViewController {
 
     let mainView = YouTubeWebView()
     

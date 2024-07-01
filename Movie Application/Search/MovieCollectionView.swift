@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class MovieCollectionView: BaseView {
+final class MovieCollectionView: BaseView {
     
     lazy var movieCollectionView = UICollectionView(frame: .zero, collectionViewLayout: collectionViewLayout())
     

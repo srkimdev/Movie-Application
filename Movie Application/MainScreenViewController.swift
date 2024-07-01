@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class MainScreenViewController: BaseViewController {
+final class MainScreenViewController: BaseViewController {
 
     let mainImage = UIImageView()
     let subImage1 = UIImageView()

@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 import Alamofire
 
-class MovieListViewController: BaseViewController {
+final class MovieListViewController: BaseViewController {
     
     var weekMovieInfoList: [weekMovieInfo] = []
     var detailMovieList: [[detailMovieInfo]] = []
@@ -79,7 +79,7 @@ extension MovieListViewController: UITableViewDelegate, UITableViewDataSource {
 
 extension MovieListViewController {
     
-    func callRequest1() {
+    private func callRequest1() {
         
         TMDBAPI.shared.communication(api: APIRequest.firstInfo, model: weekMovie.self) { value, error in
             
@@ -93,7 +93,7 @@ extension MovieListViewController {
         }
     }
     
-    func callRequest2(id: Int) {
+    private func callRequest2(id: Int) {
         
         TMDBAPI.shared.communication(api: APIRequest.secondInfo(id: id), model: detailMovie.self) { value, error in
             

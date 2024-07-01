@@ -7,7 +7,7 @@
 
 import UIKit
 
-class MovieListView: BaseView {
+final class MovieListView: BaseView {
     
     let movieTableView = UITableView()
     
@@ -16,7 +16,6 @@ class MovieListView: BaseView {
         
         movieTableView.register(MovieListTableViewCell.self, forCellReuseIdentifier: MovieListTableViewCell.identifier)
     }
-    
     
     override func configureHierarchy() {
         addSubview(movieTableView)
@@ -34,11 +33,9 @@ class MovieListView: BaseView {
     }
 
     override func configureUI() {
-        
         backgroundColor = .white
         movieTableView.rowHeight = 430
         movieTableView.separatorStyle = .none
-        
     }
 
 }

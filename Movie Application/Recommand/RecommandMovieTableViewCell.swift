@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class RecommandMovieTableViewCell: BaseTableViewCell {
+final class RecommandMovieTableViewCell: BaseTableViewCell {
     
     let titleLabel = {
         let view = UILabel()
@@ -59,7 +59,7 @@ class RecommandMovieTableViewCell: BaseTableViewCell {
         collectionView.backgroundColor = .black
     }
     
-    func designCell(text: String) {
+    private func designCell(text: String) {
         titleLabel.text = text
     }
     

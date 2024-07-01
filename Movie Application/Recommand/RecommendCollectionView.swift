@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class RecommendCollectionView: BaseView {
+final class RecommendCollectionView: BaseView {
     
     let movieTitle = UILabel()
     
@@ -57,6 +57,5 @@ class RecommendCollectionView: BaseView {
         movieTableView.backgroundColor = .black
         
     }
-    
     
 }

@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 import Alamofire
 
-class MovieCollectionViewController: BaseViewController {
+final class MovieCollectionViewController: BaseViewController {
     
     let mainView = MovieCollectionView()
     

@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class MovieInfoTableViewCell: BaseTableViewCell {
+final class MovieInfoTableViewCell: BaseTableViewCell {
     
     let actorImage = UIImageView()
     let actorName = UILabel()
@@ -62,7 +62,7 @@ class MovieInfoTableViewCell: BaseTableViewCell {
         characterName.font = .systemFont(ofSize: 13)
     }
     
-    func designCell(transition: detailMovieInfo) {
+    private func designCell(transition: detailMovieInfo) {
         
         actorName.text = transition.name
         let url = URL(string: "https://image.tmdb.org/t/p/w780" + (transition.profile_path ?? ""))

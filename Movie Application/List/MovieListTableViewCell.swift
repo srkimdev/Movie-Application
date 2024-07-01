@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 import Kingfisher
 
-class MovieListTableViewCell: BaseTableViewCell {
+final class MovieListTableViewCell: BaseTableViewCell {
 
     let dateLabel = UILabel()
     let hashLabel = UILabel()
@@ -61,7 +61,6 @@ class MovieListTableViewCell: BaseTableViewCell {
             make.leading.equalTo(contentView.safeAreaLayoutGuide).offset(16)
             make.trailing.equalTo(contentView.safeAreaLayoutGuide)
             make.height.equalTo(16)
-            
         }
         
         hashLabel.snp.makeConstraints { make in
@@ -196,7 +195,7 @@ class MovieListTableViewCell: BaseTableViewCell {
         
     }
     
-    func designCell(transition: weekMovieInfo) {
+    private func designCell(transition: weekMovieInfo) {
         
         movieTitleLabel.text = transition.title
         dateLabel.text = transition.release_date
@@ -214,7 +213,7 @@ class MovieListTableViewCell: BaseTableViewCell {
         
     }
     
-    func designCell(transition: [String]) {
+    private func designCell(transition: [String]) {
         let joinedString = transition.joined(separator: ", ")
         characterLabel.text = joinedString
     }

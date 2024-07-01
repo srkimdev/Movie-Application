@@ -9,7 +9,7 @@ import UIKit
 import Kingfisher
 import SnapKit
 
-class RecommandMovieCollectionViewCell: BaseCollectionViewCell {
+final class RecommandMovieCollectionViewCell: BaseCollectionViewCell {
     
     let movieImage = UIImageView()
     
@@ -34,7 +34,7 @@ class RecommandMovieCollectionViewCell: BaseCollectionViewCell {
         movieImage.layer.masksToBounds = true
     }
     
-    func designCell(transition: RecommandKind) {
+    private func designCell(transition: RecommandKind) {
         let url = URL(string: "https://image.tmdb.org/t/p/w780" + (transition.poster_path ?? ""))
         movieImage.kf.setImage(with: url)
     }

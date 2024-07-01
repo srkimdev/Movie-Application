@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class MovieInfoView: BaseView {
+final class MovieInfoView: BaseView {
     
     let movieBackground = UIImageView()
     let movieTitle = UILabel()

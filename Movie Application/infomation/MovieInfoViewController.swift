@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 import Kingfisher
 
-class MovieInfoViewController: BaseViewController {
+final class MovieInfoViewController: BaseViewController {
 
     var list: weekMovieInfo
     var list2: [detailMovieInfo]

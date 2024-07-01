@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class MovieInfo2TableViewCell: BaseTableViewCell {
+final class MovieInfo2TableViewCell: BaseTableViewCell {
     
     let overViewLabel = UILabel()
     let plusButton = UIButton()
@@ -45,7 +45,7 @@ class MovieInfo2TableViewCell: BaseTableViewCell {
         plusButton.setImage(UIImage(systemName: "chevron.down"), for: .normal)
     }
     
-    func designCell(transition: weekMovieInfo) {
+    private func designCell(transition: weekMovieInfo) {
         overViewLabel.text = transition.overview
         overViewLabel.font = .systemFont(ofSize: 14)
     }
