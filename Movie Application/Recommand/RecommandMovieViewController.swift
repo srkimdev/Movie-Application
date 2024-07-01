@@ -11,11 +11,12 @@ import Alamofire
 
 class RecommandMovieViewController: BaseViewController {
 
-    let category = ["추천 영화", "비슷한 영화"]
+    let category = ["추천 영화", "비슷한 영화", "포스터"]
     var data: titleID?
     
     var imageList: [[RecommandKind]] = [[RecommandKind(poster_path: "")],
-                                        [RecommandKind(poster_path: "")]]
+                                        [RecommandKind(poster_path: "")],
+                                        [posterID(file_path: "")]]
     
     let mainView = RecommendCollectionView()
     
@@ -38,17 +39,11 @@ class RecommandMovieViewController: BaseViewController {
             TMDBAPI.shared.communication(api: APIRequest.recommand(query: data.id), model: RecommandMovie.self) { value, error in
                 
                 guard let value = value else { return }
-                
-                var filterList: [RecommandKind] = []
-            
-                for i in value.results {
-                    filterList.append(i)
-                }
-                self.imageList[0] = filterList
+    
+                self.imageList[0] = value.results
             
                 group.leave()
             }
-            
         }
         
         group.enter()
@@ -57,16 +52,26 @@ class RecommandMovieViewController: BaseViewController {
                 
                 guard let value = value else { return }
                 
-                var filterList: [RecommandKind] = []
-                
-                for i in value.results {
-                    filterList.append(i)
-                }
-                self.imageList[1] = filterList
-                
+                self.imageList[1] = value.results
+            
                 group.leave()
             }
             
+        }
+        
+        group.enter()
+        DispatchQueue.global().async(group: group) {
+            TMDBAPI.shared.communication(api: APIRequest.poster(query: data.id), model: TotalPoster.self) { value, error in
+                
+                guard let value = value else {
+                    
+                    group.leave()
+                    return }
+                
+                self.imageList[2] = value.backdrops
+            
+                group.leave()
+            }
         }
         
         group.notify(queue: .main) {

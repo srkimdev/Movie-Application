@@ -60,9 +60,7 @@ class RecommandMovieTableViewCell: BaseTableViewCell {
     }
     
     func designCell(text: String) {
-        
         titleLabel.text = text
-        
     }
     
 }

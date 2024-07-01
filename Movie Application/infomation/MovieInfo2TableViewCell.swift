@@ -27,15 +27,13 @@ class MovieInfo2TableViewCell: BaseTableViewCell {
     override func configureLayout() {
         overViewLabel.snp.makeConstraints { make in
             make.top.equalTo(contentView.safeAreaLayoutGuide).offset(8)
-            make.leading.equalTo(contentView.safeAreaLayoutGuide).offset(20)
-            make.trailing.equalTo(contentView.safeAreaLayoutGuide).offset(-20)
+            make.horizontalEdges.equalTo(contentView.safeAreaLayoutGuide).inset(20)
             make.height.greaterThanOrEqualTo(30).priority(.required)
         }
         
         plusButton.snp.makeConstraints { make in
             make.top.equalTo(overViewLabel.snp.bottom)
-            make.leading.equalTo(contentView.safeAreaLayoutGuide).offset(20)
-            make.trailing.equalTo(contentView.safeAreaLayoutGuide).offset(-20)
+            make.horizontalEdges.equalTo(contentView.safeAreaLayoutGuide).inset(20)
             make.bottom.equalTo(contentView.safeAreaLayoutGuide).offset(-4)
         }
         
@@ -48,10 +46,8 @@ class MovieInfo2TableViewCell: BaseTableViewCell {
     }
     
     func designCell(transition: weekMovieInfo) {
-        
         overViewLabel.text = transition.overview
         overViewLabel.font = .systemFont(ofSize: 14)
-        
     }
     
 }

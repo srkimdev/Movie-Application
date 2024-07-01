@@ -17,6 +17,7 @@ enum APIRequest {
     
     case recommand(query: Int)
     case similar(query: Int)
+    case poster(query: Int)
     
     var baseURL: String {
         return "https://api.themoviedb.org/3/"
@@ -39,6 +40,9 @@ enum APIRequest {
             
         case .similar(let movieID):
             return URL(string: baseURL + "movie/\(movieID)/similar")!
+            
+        case .poster(let movieID):
+            return URL(string: baseURL + "movie/\(movieID)/images")!
 
         }
     }

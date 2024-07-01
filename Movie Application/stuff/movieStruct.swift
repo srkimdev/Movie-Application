@@ -81,16 +81,27 @@ struct MoviePoster: Decodable {
     
 }
 
-struct RecommandMovie: Decodable {
+struct RecommandMovie: Decodable, Identifiable {
     
+    var id: String
     let results: [RecommandKind]
     
 }
 
 struct RecommandKind: Decodable {
-    
     let poster_path: String?
-    
+}
+
+struct TotalPoster: Decodable {
+    let backdrops: [posterID]
+}
+
+struct posterID: Decodable {
+    let file_path: String?
+}
+
+protocol Identifiable {
+    var id: String { get }
 }
 
 struct titleID {

@@ -23,11 +23,9 @@ class RecommandMovieCollectionViewCell: BaseCollectionViewCell {
     }
     
     override func configureLayout() {
-        
         movieImage.snp.makeConstraints { make in
             make.edges.equalTo(contentView.safeAreaLayoutGuide)
         }
-        
     }
     
     override func configureUI() {
@@ -37,9 +35,7 @@ class RecommandMovieCollectionViewCell: BaseCollectionViewCell {
     }
     
     func designCell(transition: RecommandKind) {
-
         let url = URL(string: "https://image.tmdb.org/t/p/w780" + (transition.poster_path ?? ""))
         movieImage.kf.setImage(with: url)
-        
     }
 }
